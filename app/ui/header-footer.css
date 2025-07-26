@@ -1,0 +1,35 @@
+.link-header {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #B89E58;
+}
+.link-header:hover {
+  color: #fff;
+}
+
+.footer-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #B89E58;
+}
+
+.background-header {
+  background-color: #481a1a;
+}
+
+.footer-container {
+  background-color: #481a1a;
+  padding: 2rem;
+  color: #fff;
+}
+
+.link-footer {
+  color: #B89E58;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.link-footer:hover {
+  color: #fff;
+}
