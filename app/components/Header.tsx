@@ -32,7 +32,7 @@ export default function Header() {
         {/* Derecha */}
         <nav className="flex gap-6 justify-end">
            <Link
-            href="/genetica"
+            href="/nuestra-genetica"
           >
             <h3 className={`${cinzel.className} link-header`}>Nuestra Genética</h3>
           </Link>

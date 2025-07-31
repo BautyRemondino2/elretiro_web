@@ -41,6 +41,12 @@
   background-color: #d9c06b;
 }
 
+.audio-descripcion {
+  width: 670px; 
+  height: 100px;
+}
+
+
 /* Video Section */
 
 .container_video_institucional {

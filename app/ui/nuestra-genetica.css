@@ -1,0 +1,30 @@
+.titulo-genetica {
+  text-align: center;
+  color: #B89E58;
+  margin: 2rem;
+  font-size: 2rem;
+}
+
+
+
+
+.genetica-toggle-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.genetica-button {
+  background-color: #481a1a;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.genetica-button:hover {
+  background-color: #B89E58;
+}

@@ -17,5 +17,27 @@ body {
   flex: 1;
 }
 
+.whatsapp-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+  background-color: #25d366;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+  color: #fff;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.whatsapp-fixed:hover {
+  transform: scale(1.1);
+}
+
 
 

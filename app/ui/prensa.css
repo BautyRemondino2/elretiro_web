@@ -1,0 +1,33 @@
+.prensa_foto {
+  width: 60%;
+  height: 100%;
+}
+
+.titulo-prensa {
+  text-align: center;
+  color: #B89E58;
+  margin: 2rem;
+  font-size: 2rem;
+}
+
+.subtitulo-prensa {
+  text-align: center;
+  color: #B89E58;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+.subtitulo-video {
+    text-justify: center;
+    color: #fff;
+}
+
+.año {
+    text-justify: center;
+    color: #B89E58;
+    font-weight: bold;
+}
+
+.card-prensa {
+    background-color: #481a1a;
+}

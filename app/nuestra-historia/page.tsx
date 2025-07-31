@@ -1,4 +1,4 @@
-import '../ui/nuestra_historia.css';
+import '../ui/nuestra-historia.css';
 import { Cinzel, Open_Sans } from 'next/font/google';
 
 const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });

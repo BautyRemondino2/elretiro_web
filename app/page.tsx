@@ -23,7 +23,12 @@ const Home = () => {
             <a href="https://www.youtube.com/live/3WHPPliIBCo" target="_blank" rel="noopener noreferrer" className={`${cinzel.className} link-dorado`}>🛑LIVE 🎥 STREAMING</a>
             <a href="/videos" target="_blank" rel="noopener noreferrer" className={`${cinzel.className} link-dorado`}>🎬  VIDEOS Y PRE-OFERTAS</a>
             <a href="https://app.rosgannet.com.ar/remate/1257?type=lote&remateName=21°%20Remate%20Anual%20Cabaña%20El%20Retiro" target="_blank" rel="noopener noreferrer" className={`${cinzel.className} link-dorado`}>📢❗🚨 CATÁLOGO DEL REMATE</a>
+            <audio controls className="audio-descripcion">
+              <source src="/audio/audio-pa.mp3" type="audio/mpeg" />
+              Tu navegador no soporta el audio.
+            </audio>
           </div>
+          
         </div>
       </div>
 
@@ -58,14 +63,14 @@ const Home = () => {
           <img src="/remates.jpg" alt="Historial Remates" />
         </div>
         <h4 className={`${cinzel.className}`}>Historial Remates</h4>
-        <a href="/nuestra-historia" className="boton-galeria">Ver más</a>
+        <a href="/historial-remates" className="boton-galeria">Ver más</a>
       </div>
       <div className="bloque-img">
         <div className="img-wrapper">
           <img src="/genetica.jpg" alt="Nuestra Genética" />
         </div>
         <h4 className={`${cinzel.className}`}>Nuestra Genética</h4>
-        <a href="/historial-remates" className="boton-galeria">Ver más</a>
+        <a href="/nuestra-genetica" className="boton-galeria">Ver más</a>
       </div>
       <div className="bloque-img">
         <div className="img-wrapper">
