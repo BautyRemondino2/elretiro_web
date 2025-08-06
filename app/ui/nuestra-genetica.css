@@ -5,8 +5,21 @@
   font-size: 2rem;
 }
 
+.animal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 0.5rem;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+}
 
-
+.animal-card {
+  width: fit-content;
+}
 
 .genetica-toggle-container {
   display: flex;

@@ -2,9 +2,22 @@
 import '../ui/nuestra-genetica.css';
 import { Cinzel, Open_Sans } from 'next/font/google';
 import { useState } from 'react';
+import AnimalCard from '../components/AnimalCard';
 
 const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });
 const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
+
+const toros = [
+  { name: 'MARCAERRE GAUCHO', image: '/producto/toros_padres/gaucho.jpg', slug: 'gaucho' },
+  { name: 'MARCAERRE GAUCHO', image: '/producto/toros_padres/gaucho.jpg', slug: 'gaucho' },
+  { name: 'MARCAERRE GAUCHO', image: '/producto/toros_padres/gaucho.jpg', slug: 'gaucho' },
+];
+
+const donantes = [
+  { name: 'MARCAERRE VICKY', image: '/producto/donantes/vicky.jpg', slug: 'vicky' },
+  { name: 'MARCAERRE BONITA', image: '/producto/donantes/vicky.jpg', slug: 'vicky' },
+  { name: 'MARCAERRE BRAVA', image: '/producto/donantes/vicky.jpg', slug: 'vicky' },
+];
 
 export default function NuestraGenetica() {
   const [selected, setSelected] = useState<'toros' | 'vacas' | null>(null);
@@ -36,18 +49,28 @@ export default function NuestraGenetica() {
             </button>
         </div>
       </div>
-      <img src="divisor.png" alt="" className="text-center h-8 w-auto mx-auto my-6" />
+      <div className="divisor-container">
+        <div className="line" />
+        <img src="./divisor.png" alt="Divisor" />
+        <div className="line" />
+      </div>
 
-      {selected === 'toros' && (
+      {(selected === 'toros' || selected === null) && (
         <div className="text-center text-lg">
-          {/* Aquí renderizarás una lista de toros padres */}
-          <p>Lista de toros padres...</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {toros.map((toro, index) => (
+                  <AnimalCard key={index} name={toro.name} image={toro.image} slug={toro.slug} />
+                ))}
+            </div>
         </div>
       )}
       {selected === 'vacas' && (
         <div className="text-center text-lg">
-          {/* Aquí renderizarás una lista de vacas donantes */}
-          <p>Lista de vacas donantes...</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {donantes.map((vaca, index) => (
+                  <AnimalCard key={index} name={vaca.name} image={vaca.image} slug={vaca.slug} />
+                ))}
+            </div>
         </div>
       )}
     </div>

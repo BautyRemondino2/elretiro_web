@@ -1,0 +1,163 @@
+.animal-page {
+  min-height: 100vh;
+  width: 100%;
+  padding: 3rem 2rem;
+  background-color: #2d1110;
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.animal-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .animal-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.animal-image {
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.animal-price {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.animal-name {
+  font-size: 2.75rem;
+  color: #B89E58;
+  margin-bottom: 0.5rem;
+}
+
+
+.animal-medals {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.medal-badge {
+  background-color: #fdd9b5;
+  color: #2d1110;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.animal-info-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+}
+
+.animal-characteristics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #B89E58;
+}
+
+.animal-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background-color: #B89E58;
+  color: white;
+  border: none;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid #B89E58;
+}
+
+.subtitulo {
+  text-align: center;
+  color: #B89E58;
+  margin: 1rem;
+  padding-top: 80px;
+  font-size: 1.5rem;
+}
+
+.arbol {
+    width: 70%;
+    margin: 2rem auto 0 auto;
+    text-align: center;
+}
+
+.descripcion-text {
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    text-justify: center;
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+
+/* Tabla de Dependencias Genéticas */
+
+.tabla-deps {
+  width: auto;
+  max-width: 100%;
+  margin: 2rem auto;
+  border-collapse: collapse;
+  font-size: 1rem;
+  color: white;
+  text-align: center;
+  background-color: transparent;
+}
+
+.tabla-deps th,
+.tabla-deps td {
+  border: 1px solid #B89E58;
+  padding: 10px 14px;
+}
+
+.tabla-deps thead {
+  background-color: transparent;
+  font-weight: bold;
+  color: #B89E58;
+}
+
+.tabla-deps tbody tr:nth-child(odd) {
+  background-color: transparent;
+}
+
+.tabla-deps td:first-child {
+  font-weight: bold;
+  text-align: left;
+  color: #B89E58;
+  background-color: transparent;
+}

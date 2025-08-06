@@ -1,0 +1,36 @@
+.img-animal {
+    width: 100%;
+    text-align: center;
+}
+
+.name-animal {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: #481a1a;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.link-leer-mas {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #481a1a;
+    text-align: left;
+    text-decoration: underline;
+    margin-top: 0.5rem;
+}
+
+.link-leer-mas:hover {
+    color: #B89E58;
+}
+
+.animal-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+}

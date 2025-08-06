@@ -14,7 +14,7 @@ export default function NuestraHistoria() {
         <div className="historia-texto">
           <h3 className={`${cinzel.className} nombre-fundador`}>Nuestra historia</h3>
           <p>
-            Mi nombre es Ricardo J. Remondino y junto a mi padre fundamos “CAMPOS Y CABAÑA EL RETIRO S.A.” y desde hace 30 años nos dedicamos a criar y producir Genética BRAFORD de la más alta calidad para nuestro propio REMATE ANUAL y seguir participando en las más importantes exposiciones ganaderas, entre las que se cuenta la EXPOSICIÓN INTERNACIONAL DE PALERMO.
+            Mi nombre es Ricardo J. Remondino y junto a mi padre fundamos “CAMPOS Y CABAÑA EL RETIRO S.A.” y desde hace 30 años nos dedicamos a criar y producir Genética BRAFORD de la más alta calidad para nuestro propio REMATE ANUAL y seguir participando en las más importantes exposiciones ganaderas, entre las que se cuenta la EXPOSICIÓN INTERNACIONAL DE PALERMO......
           </p>
         </div>
       </div>
