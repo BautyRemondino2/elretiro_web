@@ -7,7 +7,11 @@ import { Cinzel, Open_Sans } from 'next/font/google';
 const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });
 const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
 
-export default async function AnimalPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: { slug: string };
+}
+
+export default async function AnimalPage({ params }: PageProps) {
   const animal = animales.find(a => a.slug === params.slug);
 
   if (!animal) {
