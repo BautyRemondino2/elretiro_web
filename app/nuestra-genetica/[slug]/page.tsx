@@ -67,12 +67,12 @@ export default function AnimalPage({ params }: Props) {
           </div>
         </div>
       </div>
-      <h2 className={`${cinzel.className} subtitulo`}>Descripción</h2>
+      <h2 id="tabla-deps" className={`${cinzel.className} subtitulo`}>Descripción</h2>
       <p className={`${openSans.className} descripcion-text`}>{animal.descripcion}</p>
       <h2 className={`${cinzel.className} subtitulo`}>Deps</h2>
 
-      {animal.deps && (
-        <table id="tabla-deps" className="tabla-deps">
+      {animal.deps && typeof animal.deps === 'object' && (
+        <table className="tabla-deps">
           <thead>
             <tr>
               <th>Genética</th>
@@ -85,9 +85,14 @@ export default function AnimalPage({ params }: Props) {
             {["dep", "prec", "ranking", "promedio"].map((row) => (
               <tr key={row}>
                 <td>{row.toUpperCase()}</td>
-                {Object.keys(animal.deps).map((key) => (
-                  <td key={key}>{animal.deps[key][row]}</td>
-                ))}
+                {Object.entries(animal.deps ?? {}).map(([key, value]) => {
+                  const val = value as Record<string, number | string>;
+                  return (
+                    <td key={key}>
+                      {typeof val === "object" && val !== null && row in val ? val[row] : "-"}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
