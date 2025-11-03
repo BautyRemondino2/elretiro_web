@@ -21,7 +21,7 @@ const Home = () => {
           {/* Links del remate */}
           <div className="links-column">
             <a href="https://www.youtube.com/live/3WHPPliIBCo" target="_blank" rel="noopener noreferrer" className={`${cinzel.className} link-dorado`}>🛑LIVE 🎥 STREAMING</a>
-            <a href="/videos" target="_blank" rel="noopener noreferrer" className={`${cinzel.className} link-dorado`}>🎬  VIDEOS Y PRE-OFERTAS</a>
+            <a href="https://app.rosgannet.com.ar/remate/1586?type=lote&remateName=22°%20Remate%20Anual%20Cabaña%20el%20Retiro%20-%20Guillermo%20Lehmann" target="_blank" rel="noopener noreferrer" className={`${cinzel.className} link-dorado`}>🎬  VIDEOS Y PRE-OFERTAS</a>
             <a href="https://app.rosgannet.com.ar/remate/1257?type=lote&remateName=21°%20Remate%20Anual%20Cabaña%20El%20Retiro" target="_blank" rel="noopener noreferrer" className={`${cinzel.className} link-dorado`}>📢❗🚨 CATÁLOGO DEL REMATE</a>
             <audio controls className="audio-descripcion">
               <source src="/audio/audio-pa.mp3" type="audio/mpeg" />
