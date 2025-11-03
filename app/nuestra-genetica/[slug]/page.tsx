@@ -1,17 +1,23 @@
 import '../../ui/animal-page.css';
 import { notFound } from 'next/navigation';
 import { animales } from '../../data/animales/animales';
-
 import { Cinzel, Open_Sans } from 'next/font/google';
 
+// Fuentes
 const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });
 const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
 
-export default function AnimalPage({ params }: { params: { slug: string } }) {
-  const animal = animales.find(a => a.slug === params.slug);
+// ✅ Tipado explícito correcto
+type PageProps = {
+  params: { slug: string };
+};
+
+// ✅ Componente corregido
+export default async function AnimalPage({ params }: PageProps) {
+  const animal = animales.find((a) => a.slug === params.slug);
 
   if (!animal) {
-    return notFound();
+    notFound();
   }
 
   return (
@@ -25,7 +31,7 @@ export default function AnimalPage({ params }: { params: { slug: string } }) {
         <div>
           <h1 className={`${cinzel.className} animal-name`}>{animal.nombre}</h1>
 
-          {animal.medallas && animal.medallas.length > 0 && (
+          {animal.medallas?.length > 0 && (
             <div className="animal-medals">
               {animal.medallas.map((medalla, i) => (
                 <span key={i} className="medal-badge">
@@ -61,10 +67,11 @@ export default function AnimalPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
+
       <h2 id="tabla-deps" className={`${cinzel.className} subtitulo`}>Descripción</h2>
       <p className={`${openSans.className} descripcion-text`}>{animal.descripcion}</p>
-      <h2 className={`${cinzel.className} subtitulo`}>Deps</h2>
 
+      <h2 className={`${cinzel.className} subtitulo`}>Deps</h2>
       {animal.deps && typeof animal.deps === 'object' && (
         <table className="tabla-deps">
           <thead>
@@ -76,14 +83,14 @@ export default function AnimalPage({ params }: { params: { slug: string } }) {
             </tr>
           </thead>
           <tbody>
-            {["dep", "prec", "ranking", "promedio"].map((row) => (
+            {['dep', 'prec', 'ranking', 'promedio'].map((row) => (
               <tr key={row}>
                 <td>{row.toUpperCase()}</td>
                 {Object.entries(animal.deps ?? {}).map(([key, value]) => {
                   const val = value as Record<string, number | string>;
                   return (
                     <td key={key}>
-                      {typeof val === "object" && val !== null && row in val ? val[row] : "-"}
+                      {typeof val === 'object' && val !== null && row in val ? val[row] : '-'}
                     </td>
                   );
                 })}
@@ -94,10 +101,13 @@ export default function AnimalPage({ params }: { params: { slug: string } }) {
       )}
 
       <h2 className={`${cinzel.className} subtitulo`}>Árbol Genealógico</h2>
-      <img src="/producto/arboles/arbol-vicky.png" className='arbol' alt="Árbol genealógico" />
+      <img
+        src="/producto/arboles/arbol-vicky.png"
+        className="arbol"
+        alt="Árbol genealógico"
+      />
 
-      <p>Todos los datos estan respaldados por la BRAFORD</p>
-
+      <p>Todos los datos están respaldados por la BRAFORD</p>
     </div>
   );
 }
