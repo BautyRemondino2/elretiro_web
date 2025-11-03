@@ -16,7 +16,8 @@ export default function NuestraHistoria() {
     </p>
     <div className="galeria-catalogos">
         {[
-          { year: 2024, file: 'CATALOGO 2024_comprimido.pdf', preview: `/catalogos/catalogo_previews/CATALOGO_2024.jpg` },
+          { year: 2025, file: 'CATALOGO 2025.pdf', preview: `/catalogos/catalogo_previews/CATALOGO_2025.jpg` },
+          { year: 2024, file: 'CATALOGO 2024_compressed.pdf', preview: `/catalogos/catalogo_previews/CATALOGO_2024.jpg` },
           { year: 2023, file: 'CATALOGO 2023-comprimido.pdf', preview: `/catalogos/catalogo_previews/CATALOGO_2023.jpg` },
           { year: 2022, file: 'CATALOGO 2022_compressed.pdf', preview: `/catalogos/catalogo_previews/CATALOGO_2022.jpg` },
           { year: 2021, file: 'CATALOGO 2021.pdf', preview: `/catalogos/catalogo_previews/CATALOGO_2021.jpg` },
