@@ -8,7 +8,7 @@ const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });
 const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
 
 // ✅ Tipado explícito correcto
-type PageProps = {
+type AnimalPageProps = {
   params: { slug: string };
 };
 
