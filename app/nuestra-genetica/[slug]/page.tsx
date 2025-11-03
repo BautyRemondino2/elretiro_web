@@ -13,7 +13,7 @@ type PageProps = {
 };
 
 // ✅ Componente corregido
-export default async function AnimalPage({ params }: PageProps) {
+export default async function AnimalPage({ params }: AnimalPageProps) {
   const animal = animales.find((a) => a.slug === params.slug);
 
   if (!animal) {
