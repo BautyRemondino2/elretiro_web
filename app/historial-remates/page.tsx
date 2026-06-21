@@ -10,7 +10,7 @@ export default function NuestraHistoria() {
     <h1 className={`${cinzel.className} titulo-historial`}>
         Historial de Remates
     </h1>
-    <p className={`${openSans.className} text-justify text-center max-w-4xl mx-auto`}>
+    <p className={`${openSans.className} text-justify text-center max-w-4xl mx-auto px-4`}>
         Te invitamos a recorrer la historia de nuestros remates a través de los catálogos originales de cada año. 
         Aquí podrás explorar, cada edición desde nuestros inicios: un testimonio de trabajo, pasión y tradición que nos enorgullece compartir contigo.
     </p>

@@ -10,7 +10,7 @@ const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
     return (
-      <html lang="en">
+      <html lang="es">
         <body className={`${cinzel.className} ${openSans.className}`}>
           <Header />
           <main className="main">

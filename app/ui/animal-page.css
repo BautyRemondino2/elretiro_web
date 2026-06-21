@@ -6,6 +6,12 @@
   color: white;
 }
 
+@media (max-width: 600px) {
+  .animal-page {
+    padding: 2rem 1rem;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -38,7 +44,7 @@ html {
 }
 
 .animal-name {
-  font-size: 2.75rem;
+  font-size: clamp(1.8rem, 7vw, 2.75rem);
   color: #B89E58;
   margin-bottom: 0.5rem;
 }
@@ -108,13 +114,29 @@ html {
   color: #B89E58;
   margin: 1rem;
   padding-top: 80px;
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 5vw, 1.5rem);
 }
 
 .arbol {
+    display: block;
     width: 70%;
+    max-width: 700px;
+    height: auto;
     margin: 2rem auto 0 auto;
-    text-align: center;
+}
+
+@media (max-width: 600px) {
+  .arbol {
+    width: 100%;
+  }
+
+  .animal-actions {
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    flex: 1 1 auto;
+  }
 }
 
 .descripcion-text {
@@ -128,15 +150,29 @@ html {
 
 /* Tabla de Dependencias Genéticas */
 
+.tabla-deps-wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .tabla-deps {
   width: auto;
-  max-width: 100%;
   margin: 2rem auto;
   border-collapse: collapse;
   font-size: 1rem;
   color: white;
   text-align: center;
   background-color: transparent;
+}
+
+@media (max-width: 600px) {
+  .tabla-deps th,
+  .tabla-deps td {
+    padding: 7px 9px;
+    font-size: 0.85rem;
+  }
 }
 
 .tabla-deps th,

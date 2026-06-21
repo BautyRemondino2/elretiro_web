@@ -1,33 +1,40 @@
 .prensa_foto {
   width: 60%;
-  height: 100%;
+  max-width: 700px;
+  height: auto;
 }
 
 .titulo-prensa {
   text-align: center;
-  color: #B89E58;
-  margin: 2rem;
-  font-size: 2rem;
+  color: #b89e58;
+  margin: 2rem 1rem;
+  font-size: clamp(1.6rem, 6vw, 2rem);
 }
 
 .subtitulo-prensa {
   text-align: center;
-  color: #B89E58;
+  color: #b89e58;
   margin: 1rem;
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 5vw, 1.5rem);
 }
 
 .subtitulo-video {
-    text-justify: center;
-    color: #fff;
+  text-align: left;
+  color: #fff;
 }
 
 .año {
-    text-justify: center;
-    color: #B89E58;
-    font-weight: bold;
+  text-align: left;
+  color: #b89e58;
+  font-weight: bold;
 }
 
 .card-prensa {
-    background-color: #481a1a;
+  background-color: #481a1a;
+}
+
+@media (max-width: 768px) {
+  .prensa_foto {
+    width: 90%;
+  }
 }

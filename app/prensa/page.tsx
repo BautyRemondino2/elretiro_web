@@ -111,7 +111,7 @@ function getYouTubeEmbedUrl(url: string) {
 
 export default function Prensa() {
   return (
-    <div className="min-h-screen w-full relative overflow-x-hidden pb-16">
+    <div className="min-h-screen w-full relative overflow-x-hidden pb-16 px-4">
       <h1 className={`${cinzel.className} titulo-prensa`}>Prensa</h1>
       <p className={`${openSans.className} justify-center max-w-3xl mx-auto mb-12`}>
         A lo largo de los años, Cabaña El Retiro ha participado de distintos espacios radiales y entrevistas en medios. A continuación, compartimos un momento especial en la radio y una recopilación de entrevistas disponibles en YouTube.

@@ -8,7 +8,7 @@ const Home = () => {
     <div className="min-h-screen w-full relative overflow-x-hidden">
       {/* Imagen de fondo */}
       <div
-        className="h-[900px] bg-cover bg-center"
+        className="hero-home bg-cover bg-center"
         style={{ backgroundImage: "url('/foto_home.jpeg')" }}
       >
         {/* Flyer y links */}

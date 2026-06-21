@@ -7,14 +7,15 @@ import { Cinzel, Open_Sans } from 'next/font/google';
 const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });
 const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
 
-// ✅ Tipado explícito correcto
+// ✅ Tipado explícito correcto (Next.js 15: params es una Promise)
 type AnimalPageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 // ✅ Componente corregido
 export default async function AnimalPage({ params }: AnimalPageProps) {
-  const animal = animales.find((a) => a.slug === params.slug);
+  const { slug } = await params;
+  const animal = animales.find((a) => a.slug === slug);
 
   if (!animal) {
     notFound();
@@ -31,9 +32,9 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
         <div>
           <h1 className={`${cinzel.className} animal-name`}>{animal.nombre}</h1>
 
-          {animal.medallas?.length > 0 && (
+          {animal.medallas?.filter(Boolean).length > 0 && (
             <div className="animal-medals">
-              {animal.medallas.map((medalla, i) => (
+              {animal.medallas.filter(Boolean).map((medalla, i) => (
                 <span key={i} className="medal-badge">
                   {medalla}
                 </span>
@@ -73,6 +74,7 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
 
       <h2 className={`${cinzel.className} subtitulo`}>Deps</h2>
       {animal.deps && typeof animal.deps === 'object' && (
+        <div className="tabla-deps-wrapper">
         <table className="tabla-deps">
           <thead>
             <tr>
@@ -98,6 +100,7 @@ export default async function AnimalPage({ params }: AnimalPageProps) {
             ))}
           </tbody>
         </table>
+        </div>
       )}
 
       <h2 className={`${cinzel.className} subtitulo`}>Árbol Genealógico</h2>

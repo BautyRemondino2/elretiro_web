@@ -33,8 +33,8 @@ export default function NuestraGenetica() {
         Te invitamos a conocer más sobre nuestra genética y cómo contribuimos a la mejora del ganado en la región.
         </p>
 
-      <div className="flex justify-center mt-6">
-        <div className="grid grid-cols-2 gap-16">
+      <div className="flex justify-center mt-6 px-4">
+        <div className="grid grid-cols-2 gap-4 sm:gap-16">
             <button
             className="genetica-button"
             onClick={() => setSelected('toros')}

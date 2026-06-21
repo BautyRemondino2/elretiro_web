@@ -1,8 +1,12 @@
 .titulo-genetica {
   text-align: center;
-  color: #B89E58;
-  margin: 2rem;
-  font-size: 2rem;
+  color: #b89e58;
+  margin: 2rem 1rem;
+  font-size: clamp(1.6rem, 6vw, 2rem);
+}
+
+.titulo-genetica + p {
+  padding: 0 1rem;
 }
 
 .animal-info {
@@ -34,10 +38,37 @@
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   border-radius: 20px;
+  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .genetica-button:hover {
-  background-color: #B89E58;
+  background-color: #b89e58;
+}
+
+/* Divisor decorativo (imagen ornamental de ancho completo) */
+.divisor-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+.divisor-container .line {
+  display: none;
+}
+
+.divisor-container img {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+}
+
+@media (max-width: 480px) {
+  .genetica-button {
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+  }
 }

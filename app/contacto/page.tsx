@@ -26,7 +26,7 @@ export default function Contacto() {
 
         {/* Contactos y redes */}
         <div className="w-full md:w-1/2 flex flex-col items-center gap-10">
-          <div className="flex gap-10 justify-center flex-wrap">
+          <div className="flex gap-6 sm:gap-10 justify-center flex-wrap">
             <div className="flex-1 max-w-xs text-center">
               <img src="/ricardo_javier.jpg" alt="Contacto 1" className="rounded-full w-40 h-40 object-cover mx-auto mb-3 shadow" />
               <p className={`${cinzel.className} font-semibold mt-4`}>Ricardo Javier Remondino</p>
@@ -40,7 +40,7 @@ export default function Contacto() {
               <p className="mt-1">📧 rmremondino@gmail.com</p>
             </div>
           </div>
-          <div className="flex justify-center gap-50 text-xl mt-8">
+          <div className="flex justify-center gap-10 sm:gap-20 text-xl mt-8">
             <a href="https://www.instagram.com/elretirocabana" target="_blank" rel="noopener noreferrer" className="link-footer hover:text-black">
               📸 Instagram
             </a>
