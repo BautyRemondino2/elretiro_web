@@ -4,9 +4,17 @@ import Header from "./components/Header";
 import { FC, PropsWithChildren } from "react";
 import Footer from './components/Footer';
 import { Cinzel, Open_Sans } from 'next/font/google';
+import type { Metadata } from 'next';
 
 const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });
 const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
+
+export const metadata: Metadata = {
+  title: 'Cabaña El Retiro | Genética Braford',
+  description:
+    'Cabaña El Retiro: más de 30 años produciendo genética Braford de la más alta calidad. Remate anual, historial, prensa y contacto.',
+  icons: { icon: '/logo.png' },
+};
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
     return (

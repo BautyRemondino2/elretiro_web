@@ -51,7 +51,7 @@ export default function NuestraGenetica() {
       </div>
       <div className="divisor-container">
         <div className="line" />
-        <img src="./divisor.png" alt="Divisor" />
+        <img src="/divisor.png" alt="Divisor" />
         <div className="line" />
       </div>
 
