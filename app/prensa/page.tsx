@@ -6,11 +6,24 @@ import { SectionTitle } from '../components/ui';
 
 const VIDEOS: { t: string; y: number; id: string }[] = [
   { t: 'Solo Campo: Nota padre e hijo Remondino', y: 2024, id: 'rZ3u2gmSDYE' },
-  { t: 'Remate aniversario 20 años', y: 2023, id: '4dvfjWO63l0' },
-  { t: 'Canal San Justo — Entrevista', y: 2022, id: 'OqVmnHI4AMk' },
-  { t: 'Solo Campo: Experiencia El Retiro', y: 2022, id: 'P8IDG8bOci0' },
+  { t: 'Remate aniversario 20 años, nota Med. Vet. Ricardo Remondino', y: 2023, id: '4dvfjWO63l0' },
+  { t: 'Canal San Justo', y: 2022, id: 'OqVmnHI4AMk' },
+  { t: 'Canal San Justo — Entrevista a Ricardo', y: 2022, id: '6a4bqz3oXVE' },
+  { t: 'Solo Campo: Experiencia Cabaña El Retiro', y: 2022, id: 'P8IDG8bOci0' },
+  { t: 'Canal San Justo — Entrevista a Esc. Ricardo Mario Remondino', y: 2022, id: 'p0wMjd9z5ao' },
   { t: 'Solo Campo: Remate 18', y: 2021, id: 'HY0ItpORXSY' },
-  { t: 'Remate 2020 — video promocional', y: 2020, id: 'HzutC5-dSSE' },
+  { t: 'Solo Campo: Esc. Ricardo Mario Remondino', y: 2021, id: '2JRKAvzgMbg' },
+  { t: 'Cabaña El Retiro — Remate 2020 video promocional', y: 2020, id: 'HzutC5-dSSE' },
+  { t: 'Entrevista Med. Vet. Ricardo Remondino', y: 2020, id: 'iVSnY-JyRog' },
+  { t: 'Solo Campo: Entrevista Med. Vet. Ricardo Remondino', y: 2020, id: 'bJl2z5TplhI' },
+  { t: 'Solo Campo: Preparando remate 2020', y: 2020, id: 'zqihKE8txAI' },
+  { t: 'Entrevista a Med. Vet. Ricardo Remondino', y: 2019, id: 'QEDsQ3sLUBI' },
+  { t: 'Entrevista a Med. Vet. Ricardo Remondino', y: 2019, id: 'mrnu7Q1ZH34' },
+  { t: 'Solo Campo: en la cabaña', y: 2019, id: 'CV9dJsG1ars' },
+  { t: 'Remate en AFA', y: 2019, id: '4vV2w4Qmc5k' },
+  { t: 'Del Sel en el Remate de Cabaña El Retiro', y: 2015, id: 'MDSpsYz8z_s' },
+  { t: 'Ricardo Remondino Remate Feria en Gálvez', y: 2014, id: 'dAzBsUktBJ0' },
+  { t: 'Remate aniversario 10 años, Gálvez', y: 2013, id: 'AuLUFJmFAK0' },
 ];
 
 function VideoTile({ v }: { v: { t: string; y: number; id: string } }) {
