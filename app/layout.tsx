@@ -1,13 +1,14 @@
 import './ui/globals.css';
-import React from "react";
-import Header from "./components/Header";
-import { FC, PropsWithChildren } from "react";
-import Footer from './components/Footer';
-import { Cinzel, Open_Sans } from 'next/font/google';
+import React from 'react';
 import type { Metadata } from 'next';
+import { Cinzel, Open_Sans } from 'next/font/google';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
+import RouteFade from './components/RouteFade';
 
-const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });
-const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
+const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '600', '700'], variable: '--font-cinzel', display: 'swap' });
+const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600', '700'], variable: '--font-open-sans', display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'Cabaña El Retiro | Genética Braford',
@@ -16,27 +17,19 @@ export const metadata: Metadata = {
   icons: { icon: '/logo.png' },
 };
 
-const RootLayout: FC<PropsWithChildren> = ({ children }) => {
-    return (
-      <html lang="es">
-        <body className={`${cinzel.className} ${openSans.className}`}>
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="es" className={`${cinzel.variable} ${openSans.variable}`}>
+      <body>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Header />
-          <main className="main">
-            {/* Botón flotante de WhatsApp */}
-            <a
-              href="https://wa.me/5493404631877"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="whatsapp-fixed"
-            >
-              <img src="/icons/whatsapp.jpg" alt="WhatsApp" className="w-14 h-14" />
-            </a>
-            {children}
+          <main style={{ flex: 1 }}>
+            <RouteFade>{children}</RouteFade>
           </main>
           <Footer />
-        </body>
-      </html>
-    );
-};
-
-export default RootLayout;
+          <WhatsAppButton />
+        </div>
+      </body>
+    </html>
+  );
+}

@@ -1,156 +1,60 @@
-import '../ui/prensa.css';
-import { Cinzel, Open_Sans } from 'next/font/google';
+'use client';
 
-const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '700'] });
-const openSans = Open_Sans({ subsets: ['latin'], weight: ['400', '600'] });
+import React, { useState } from 'react';
+import { C, F } from '../components/theme';
+import { SectionTitle } from '../components/ui';
 
-const videos = [
-    {
-        title: "Solo Campo: Nota padre e hijo Remondino",
-        year: 2024,
-        url: "https://youtu.be/rZ3u2gmSDYE"
-    },
-    {
-        title: "Remate aniversario 20 años, nota Med. Vet. Ricardo Remondino",
-        year: 2023,
-        url: "https://youtu.be/4dvfjWO63l0"
-    },
-    {
-        title: "Canal San Justo",
-        year: 2022,
-        url: "https://youtu.be/OqVmnHI4AMk"
-    },
-    {
-        title: "Canal San Justo - Entrevista a Ricardo",
-        year: 2022,
-        url: "https://youtu.be/6a4bqz3oXVE"
-    },
-    {
-        title: "Solo Campo: Experiencia Cabaña El Retiro",
-        year: 2022,
-        url: "https://youtu.be/P8IDG8bOci0"
-    },
-    {
-        title: "Canal San Justo - Entrevista a Esc. Ricardo Mario Remondino",
-        year: 2022,
-        url: "https://youtu.be/p0wMjd9z5ao"
-    },
-    {
-        title: "Solo Campo: Remate 18",
-        year: 2021,
-        url: "https://youtu.be/HY0ItpORXSY"
-    },
-    {
-        title: "Solo Campo: Esc. Ricardo Mario Remondino",
-        year: 2021,
-        url: "https://youtu.be/2JRKAvzgMbg"
-    },
-    {
-        title: "Cabaña El Retiro - Remate 2020 video promocional",
-        year: 2020,
-        url: "https://youtu.be/HzutC5-dSSE"
-    },
-    {
-        title: "Entrevista Med. Vet. Ricardo Remondino",
-        year: 2020,
-        url: "https://youtu.be/iVSnY-JyRog"
-    },
-    {
-        title: "Solo Campo: Entrevista Med. Vet. Ricardo Remondino",
-        year: 2020,
-        url: "https://youtu.be/bJl2z5TplhI"
-    },
-    {
-        title: "Solo Campo: Preparando remate 2020",
-        year: 2020,
-        url: "https://youtu.be/zqihKE8txAI"
-    },
-    {
-        title: "Entrevista a Med. Vet. Ricardo Remondino",
-        year: 2019,
-        url: "https://youtu.be/QEDsQ3sLUBI"
-    },
-    {
-        title: "Entrevista a Med. Vet. Ricardo Remondino",
-        year: 2019,
-        url: "https://youtu.be/mrnu7Q1ZH34"
-    },
-    {
-        title: "Solo Campo: en la cabaña",
-        year: 2019,
-        url: "https://youtu.be/CV9dJsG1ars"
-    },
-    {
-        title: "Remate en AFA",
-        year: 2019,
-        url: "https://youtu.be/4vV2w4Qmc5k"
-    },
-    {
-        title: "Del Sel en el Remate de Cabaña El Retiro",
-        year: 2015,
-        url: "https://youtu.be/MDSpsYz8z_s"
-    },
-    {
-        title: "Ricardo Remondino Remate Feria en Gálvez",
-        year: 2014,
-        url: "https://www.youtube.com/watch?v=dAzBsUktBJ0"
-    },
-    {
-        title: "Remate aniversario 10 años, Galvez",
-        year: 2013,
-        url: "https://youtu.be/AuLUFJmFAK0"
-    }
+const VIDEOS: { t: string; y: number; id: string }[] = [
+  { t: 'Solo Campo: Nota padre e hijo Remondino', y: 2024, id: 'rZ3u2gmSDYE' },
+  { t: 'Remate aniversario 20 años', y: 2023, id: '4dvfjWO63l0' },
+  { t: 'Canal San Justo — Entrevista', y: 2022, id: 'OqVmnHI4AMk' },
+  { t: 'Solo Campo: Experiencia El Retiro', y: 2022, id: 'P8IDG8bOci0' },
+  { t: 'Solo Campo: Remate 18', y: 2021, id: 'HY0ItpORXSY' },
+  { t: 'Remate 2020 — video promocional', y: 2020, id: 'HzutC5-dSSE' },
 ];
 
-
-function getYouTubeEmbedUrl(url: string) {
-  const match = url.match(/[?&]v=([^&#]*)|youtu\.be\/([^&#]*)/);
-  const videoId = match?.[1] || match?.[2];
-  return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+function VideoTile({ v }: { v: { t: string; y: number; id: string } }) {
+  const [h, setH] = useState(false);
+  return (
+    <a
+      href={`https://youtu.be/${v.id}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => setH(true)}
+      onMouseLeave={() => setH(false)}
+      style={{ textDecoration: 'none', background: C.bordo, borderRadius: '.5rem', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: h ? '0 12px 26px rgba(0,0,0,.25)' : '0 2px 8px rgba(0,0,0,.12)', transition: 'transform .25s, box-shadow .25s', transform: h ? 'translateY(-4px)' : 'none' }}
+    >
+      <div style={{ position: 'relative', overflow: 'hidden' }}>
+        <img src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`} alt={v.t} style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block', transition: 'transform .4s', transform: h ? 'scale(1.06)' : 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: h ? 'rgba(45,17,16,.25)' : 'rgba(45,17,16,.1)', transition: 'background .25s' }}>
+          <div style={{ background: h ? C.gold : 'rgba(0,0,0,.6)', borderRadius: '50%', width: 46, height: 46, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .25s' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill={h ? '#2d1110' : 'white'}><path d="M8 5v14l11-7z" /></svg>
+          </div>
+        </div>
+      </div>
+      <div style={{ padding: '1rem' }}>
+        <p style={{ ...F.display, color: C.gold, fontWeight: 700, margin: '0 0 .35rem', fontSize: '.9rem' }}>{v.y}</p>
+        <p style={{ ...F.body, color: C.white, margin: 0, fontSize: '.88rem', lineHeight: 1.5 }}>{v.t}</p>
+      </div>
+    </a>
+  );
 }
 
-export default function Prensa() {
+export default function PrensaPage() {
   return (
-    <div className="min-h-screen w-full relative overflow-x-hidden pb-16 px-4">
-      <h1 className={`${cinzel.className} titulo-prensa`}>Prensa</h1>
-      <p className={`${openSans.className} justify-center max-w-3xl mx-auto mb-12`}>
-        A lo largo de los años, Cabaña El Retiro ha participado de distintos espacios radiales y entrevistas en medios. A continuación, compartimos un momento especial en la radio y una recopilación de entrevistas disponibles en YouTube.
-      </p>
-
-      {/* Imagen del momento radial */}
-      <div className="flex justify-center mb-10">
-        <img src="/estudio_string_agro.jpeg" alt="Momento radial de la cabaña" className="prensa_foto rounded shadow-lg" />
+    <div style={{ minHeight: '100vh', background: C.white, paddingBottom: '3rem' }}>
+      <div style={{ position: 'relative', minHeight: 320, backgroundImage: `linear-gradient(180deg, rgba(45,17,16,.5), rgba(45,17,16,.82)), url('/estudio_string_agro.jpeg')`, backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+        <div style={{ padding: '2rem' }}>
+          <SectionTitle as="h1" eyebrow="El Retiro en los medios" style={{ margin: 0 }}>Prensa</SectionTitle>
+          <p style={{ ...F.body, color: 'rgba(255,255,255,.9)', maxWidth: 640, margin: '1.25rem auto 0', lineHeight: 1.7 }}>
+            A lo largo de los años, Cabaña El Retiro ha participado de distintos espacios radiales y entrevistas en medios del agro.
+          </p>
+        </div>
       </div>
-
-      {/* Sección de entrevistas de YouTube */}
-      <div className="max-w-5xl mx-auto">
-        <h2 className={`${cinzel.className} subtitulo-prensa`}>Entrevistas en medios</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {videos.map(({ title, year, url }, i) => (
-            <div key={i} className="card-prensa p-4 rounded shadow flex flex-col justify-between h-full">
-              <div className="mb-2">
-                <p className={`${cinzel.className} año`}>{year}</p>
-                <p className={`${openSans.className} subtitulo-video`}>{title}</p>
-              </div>
-              <a href={url} target="_blank" rel="noopener noreferrer" className="block hover:opacity-90 transition flex-grow relative">
-                <img
-                  src={`https://img.youtube.com/vi/${getYouTubeEmbedUrl(url).split('/embed/')[1]}/hqdefault.jpg`}
-                  alt={`Miniatura de ${title}`}
-                  className="w-full aspect-video object-cover rounded shadow mb-2"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-12 w-12 text-white opacity-80"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-              </a>
-            </div>
-          ))}
+      <div style={{ padding: '3rem 2rem 0' }}>
+        <SectionTitle eyebrow="Mirá las notas">Entrevistas en medios</SectionTitle>
+        <div className="vid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1.5rem', maxWidth: 1000, margin: '0 auto' }}>
+          {VIDEOS.map((v) => <VideoTile key={v.id} v={v} />)}
         </div>
       </div>
     </div>

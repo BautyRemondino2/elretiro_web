@@ -1,57 +1,45 @@
-@import "tailwindcss";
+*, *::before, *::after { box-sizing: border-box; }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-html {
-  color-scheme: light;
-}
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
+html { color-scheme: light; scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; min-height: 100%; }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  font-family: var(--font-open-sans), 'Open Sans', Arial, sans-serif;
+  color: #171717;
+  background: #fff;
 }
 
-* {
-  box-sizing: border-box;
+img { max-width: 100%; }
+a { cursor: pointer; }
+::selection { background: #b89e58; color: #2d1110; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.reveal { animation: fadeUp 0.6s ease both; }
+.reveal-in { animation: fadeIn 0.5s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-in { animation: none; }
+  html { scroll-behavior: auto; }
 }
 
-.main {
-  flex: 1;
-  width: 100%;
+@media (max-width: 820px) {
+  .nav-desktop { display: none !important; }
+  .menu-toggle { display: flex !important; }
+  .two-col { grid-template-columns: 1fr !important; }
+  .gal-3, .vid-3 { grid-template-columns: 1fr !important; }
+  .hero-row { flex-direction: column !important; }
+  /* Logos institucionales: dejan de ser overlay para no chocar con los botones */
+  .hero-logos {
+    position: static !important;
+    justify-content: center;
+    padding: 0 0 1.75rem;
+  }
+  .hero-logos img { height: 64px !important; }
 }
-
-.whatsapp-fixed {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 50;
-  background-color: #25d366;
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease-in-out;
-  color: #fff;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.whatsapp-fixed:hover {
-  transform: scale(1.1);
-}
-
-
-
