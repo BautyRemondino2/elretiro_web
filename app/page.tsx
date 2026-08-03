@@ -12,6 +12,13 @@ const STATS: [string, string][] = [
   ['Pioneros', 'De las primeras cabañas Braford del país'],
 ];
 
+/* Panel translúcido sobre fondo oscuro (mismo patrón que la ficha del animal) */
+const panel: React.CSSProperties = {
+  background: 'rgba(255,255,255,.04)',
+  border: '1px solid rgba(184,158,88,.28)',
+  borderRadius: '.6rem',
+};
+
 /* Datos del 23° Remate Anual (folleto 2026) */
 const OFERTA: [string, string][] = [
   ['30', 'Toros Braford'],
@@ -19,9 +26,8 @@ const OFERTA: [string, string][] = [
   ['60', 'Vientres Braford/Brangus de generaciones avanzadas'],
 ];
 
+/* Solo lo que el hero no dice (fecha y lugar ya están arriba) */
 const REMATE = [
-  { icon: '📅', label: 'Fecha', value: 'Viernes 4 de septiembre de 2026' },
-  { icon: '📍', label: 'Lugar', value: 'Sociedad Rural San Justo · Rut. Nac. 11 km 565,5' },
   { icon: '📡', label: 'Modalidad', value: 'Remate presencial y vía streaming' },
   { icon: '🤝', label: 'Plazo', value: '90 días machos / 60 días hembras' },
 ];
@@ -58,7 +64,7 @@ export default function HomePage() {
               <p style={{ ...F.display, color: C.white, fontWeight: 700, fontSize: 'clamp(1.05rem,3.2vw,1.3rem)', margin: 0, letterSpacing: '.03em', textShadow: '0 2px 10px rgba(0,0,0,.6)' }}>Viernes 4 de septiembre de 2026</p>
               <p style={{ ...F.body, color: 'rgba(255,255,255,.9)', fontSize: '.92rem', margin: '.3rem 0 0', textShadow: '0 2px 8px rgba(0,0,0,.7)' }}>Sociedad Rural San Justo · Rut. Nac. 11 km 565,5</p>
             </div>
-            <p style={{ ...F.body, color: 'rgba(255,255,255,.9)', fontSize: '1rem', lineHeight: 1.6, margin: '0 0 .5rem', maxWidth: 420 }}>30 Toros Braford · 10 Toros Brangus · 60 Vientres Braford/Brangus de generaciones avanzadas.</p>
+            <p style={{ ...F.body, color: 'rgba(255,255,255,.9)', fontSize: '1rem', lineHeight: 1.6, margin: '0 0 .5rem', maxWidth: 420 }}>Seguí el remate en vivo, mirá los videos y accedé al catálogo completo de nuestros ejemplares.</p>
             <Btn href="https://www.youtube.com/live/3WHPPliIBCo" size="lg" style={{ alignSelf: 'flex-start' }}>🔴 Ver Streaming en Vivo</Btn>
             <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
               <Btn href="https://app.rosgannet.com.ar" variant="outline">🎬 Videos y Pre-ofertas</Btn>
@@ -84,34 +90,34 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Detalles del remate */}
-      <div style={{ padding: '4rem 2rem', background: C.white }}>
+      {/* Detalles del remate — continúa el bloque oscuro del stats strip */}
+      <div style={{ padding: '3.5rem 2rem 4rem', background: `linear-gradient(180deg, ${C.dark} 0%, ${C.bordo} 100%)` }}>
         <SectionTitle eyebrow="23° Remate Anual">Detalles del Remate</SectionTitle>
 
-        {/* Oferta destacada */}
-        <div style={{ background: `linear-gradient(180deg, ${C.bordo}, ${C.dark})`, borderRadius: '.6rem', padding: '1.9rem 1.5rem', maxWidth: 1100, margin: '0 auto 1.25rem', display: 'flex', justifyContent: 'space-around', gap: '1.75rem', flexWrap: 'wrap', textAlign: 'center' }}>
+        {/* Oferta */}
+        <div style={{ ...panel, padding: '2rem 1.5rem', maxWidth: 1100, margin: '0 auto 1.25rem', display: 'flex', justifyContent: 'space-around', gap: '1.75rem', flexWrap: 'wrap', textAlign: 'center' }}>
           {OFERTA.map(([n, l]) => (
             <div key={l} style={{ maxWidth: 230 }}>
-              <div style={{ ...F.display, color: C.gold, fontWeight: 700, fontSize: '2.4rem', lineHeight: 1 }}>{n}</div>
-              <div style={{ ...F.body, color: 'rgba(255,255,255,.8)', fontSize: '.82rem', marginTop: 8, lineHeight: 1.45, letterSpacing: '.03em' }}>{l}</div>
+              <div style={{ ...F.display, color: C.gold, fontWeight: 700, fontSize: '2.6rem', lineHeight: 1 }}>{n}</div>
+              <div style={{ ...F.body, color: 'rgba(255,255,255,.82)', fontSize: '.82rem', marginTop: 8, lineHeight: 1.45, letterSpacing: '.03em' }}>{l}</div>
             </div>
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(230px,1fr))', gap: '1.25rem', maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: '1.25rem', maxWidth: 1100, margin: '0 auto 1.25rem' }}>
           {REMATE.map(({ icon, label, value }) => (
-            <div key={label} style={{ border: '1px solid rgba(184,158,88,.35)', borderRadius: '.6rem', padding: '1.35rem 1.25rem', background: C.white, boxShadow: '0 2px 10px rgba(0,0,0,.06)' }}>
-              <div style={{ fontSize: '1.45rem', lineHeight: 1, marginBottom: '.6rem' }}>{icon}</div>
+            <div key={label} style={{ ...panel, padding: '1.35rem 1.35rem' }}>
+              <div style={{ fontSize: '1.4rem', lineHeight: 1, marginBottom: '.6rem' }}>{icon}</div>
               <div style={{ ...F.display, color: C.gold, fontWeight: 700, fontSize: '.72rem', letterSpacing: '.14em', textTransform: 'uppercase' }}>{label}</div>
-              <div style={{ ...F.body, color: '#333', fontSize: '.95rem', marginTop: '.45rem', lineHeight: 1.55 }}>{value}</div>
+              <div style={{ ...F.body, color: 'rgba(255,255,255,.9)', fontSize: '.95rem', marginTop: '.45rem', lineHeight: 1.55 }}>{value}</div>
             </div>
           ))}
         </div>
 
         {/* Organizan / invitadas */}
-        <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', maxWidth: 1100, margin: '1.25rem auto 0' }}>
+        <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', maxWidth: 1100, margin: '0 auto' }}>
           {([['Organizan', ORGANIZAN], ['Cabañas invitadas', INVITADAS]] as const).map(([titulo, lista]) => (
-            <div key={titulo} style={{ background: `linear-gradient(180deg, ${C.bordo}, ${C.dark})`, borderRadius: '.6rem', padding: '1.5rem 1.35rem' }}>
+            <div key={titulo} style={{ ...panel, padding: '1.5rem 1.35rem' }}>
               <p style={{ ...F.display, color: C.gold, fontWeight: 700, fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', margin: '0 0 1rem' }}>{titulo}</p>
               {lista.map(({ casa, persona, tel }) => (
                 <div key={casa} style={{ marginBottom: '.9rem' }}>
