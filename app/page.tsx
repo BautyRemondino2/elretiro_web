@@ -48,22 +48,6 @@ const GALLERY = [
   { img: '/prensa.jpg', title: 'Prensa', desc: 'Entrevistas y notas en medios del agro.', href: '/prensa' },
 ];
 
-/* Las carpetas se actualizan desde Drive: los videos nuevos aparecen aquí automáticamente. */
-const REMATE_VIDEO_COLLECTIONS = [
-  {
-    title: 'Toros',
-    eyebrow: 'Lotes de toros',
-    driveUrl: 'https://drive.google.com/drive/folders/1gtJRGpKOaqp8BOlgLCPIQlCmkpf-iLIm?usp=sharing',
-    embedUrl: 'https://drive.google.com/embeddedfolderview?id=1gtJRGpKOaqp8BOlgLCPIQlCmkpf-iLIm#grid',
-  },
-  {
-    title: 'Vaquillonas',
-    eyebrow: 'Lotes de vaquillonas',
-    driveUrl: 'https://drive.google.com/drive/folders/1s3BZP7YPF2AmSCfrZsfwcTPg8npP1d9H?usp=sharing',
-    embedUrl: 'https://drive.google.com/embeddedfolderview?id=1s3BZP7YPF2AmSCfrZsfwcTPg8npP1d9H#grid',
-  },
-];
-
 export default function HomePage() {
   return (
     <>
@@ -83,7 +67,7 @@ export default function HomePage() {
             <p style={{ ...F.body, color: 'rgba(255,255,255,.9)', fontSize: '1rem', lineHeight: 1.6, margin: '0 0 .5rem', maxWidth: 420 }}>Seguí el remate en vivo, mirá los videos y accedé al catálogo completo de nuestros ejemplares.</p>
             <Btn href="https://www.youtube.com/live/3WHPPliIBCo" size="lg" style={{ alignSelf: 'flex-start' }}>🔴 Ver Streaming en Vivo</Btn>
             <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
-              <Btn to="#videos-del-remate" variant="outline">🎬 Videos de los ejemplares</Btn>
+              <Btn to="/videos-del-remate" variant="outline">🎬 Ver videos de los ejemplares</Btn>
               <Btn href="https://app.rosgannet.com.ar" variant="outline">📢 Catálogo del Remate</Btn>
             </div>
           </div>
@@ -147,37 +131,6 @@ export default function HomePage() {
           ))}
         </div>
       </div>
-
-      {/* Videos de los ejemplares */}
-      <section id="videos-del-remate" style={{ padding: '4rem 2rem', background: `linear-gradient(180deg, ${C.cream} 0%, ${C.white} 100%)` }}>
-        <SectionTitle eyebrow="23° Remate Anual" color={C.bordo}>Videos de los ejemplares</SectionTitle>
-        <p style={{ ...F.body, maxWidth: 660, margin: '-.65rem auto 2rem', color: '#5e4c45', textAlign: 'center', fontSize: '.95rem', lineHeight: 1.65 }}>
-          Conocé los lotes que se presentarán en el remate. Los videos se actualizan directamente desde nuestras carpetas de Drive.
-        </p>
-        <div className="video-collections" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '1.5rem' }}>
-          {REMATE_VIDEO_COLLECTIONS.map(({ title, eyebrow, driveUrl, embedUrl }) => (
-            <article key={title} style={{ overflow: 'hidden', background: C.white, borderRadius: '.65rem', border: '1px solid rgba(72,26,26,.13)', boxShadow: '0 8px 24px rgba(45,17,16,.12)' }}>
-              <div style={{ padding: '1.05rem 1.2rem .9rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', borderBottom: '1px solid rgba(72,26,26,.1)' }}>
-                <div>
-                  <p style={{ ...F.display, color: C.gold, fontWeight: 700, fontSize: '.67rem', letterSpacing: '.16em', textTransform: 'uppercase', margin: '0 0 .28rem' }}>{eyebrow}</p>
-                  <h3 style={{ ...F.display, color: C.bordo, fontWeight: 700, fontSize: '1.35rem', margin: 0 }}>{title}</h3>
-                </div>
-                <a href={driveUrl} target="_blank" rel="noopener noreferrer" style={{ ...F.display, flexShrink: 0, color: C.bordo, border: `1px solid ${C.gold}`, borderRadius: '999px', padding: '.48rem .72rem', fontWeight: 700, fontSize: '.68rem', letterSpacing: '.04em', textDecoration: 'none', whiteSpace: 'nowrap' }}>
-                  Abrir en Drive ↗
-                </a>
-              </div>
-              <div className="drive-folder-frame" style={{ height: 380, background: '#f6f2eb' }}>
-                <iframe
-                  src={embedUrl}
-                  title={`Videos de ${title} del remate`}
-                  style={{ display: 'block', width: '100%', height: '100%', border: 'none' }}
-                  allowFullScreen
-                />
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
 
       {/* Video */}
       <div style={{ padding: '4rem 2rem', background: C.white, textAlign: 'center' }}>

@@ -32,9 +32,8 @@ a { cursor: pointer; }
 @media (max-width: 820px) {
   .nav-desktop { display: none !important; }
   .menu-toggle { display: flex !important; }
-  .two-col, .video-collections { grid-template-columns: 1fr !important; }
+  .two-col, .video-collections, .remate-video-grid { grid-template-columns: 1fr !important; }
   .gal-3, .vid-3 { grid-template-columns: 1fr !important; }
-  .drive-folder-frame { height: 340px !important; }
   .hero-row { flex-direction: column !important; }
   /* Logos institucionales: dejan de ser overlay para no chocar con los botones */
   .hero-logos {
