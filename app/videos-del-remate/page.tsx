@@ -1,41 +1,19 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { SectionTitle } from '../components/ui';
 import { C, F } from '../components/theme';
+import { VideoCard } from './VideoCard';
 import { VIDEOS_TOROS, VIDEOS_VAQUILLONAS, type VideoRemate } from '../data/videos-remate';
 
-function VideoCard({ video, categoria }: { video: VideoRemate; categoria: string }) {
-  const title = `Corral ${String(video.corral).padStart(2, '0')}${video.nombre ? ` — ${video.nombre}` : ''}`;
-  const previewUrl = `https://drive.google.com/file/d/${video.driveId}/preview`;
-  const driveUrl = `https://drive.google.com/file/d/${video.driveId}/view`;
-
-  return (
-    <article style={{ background: C.white, borderRadius: '.65rem', overflow: 'hidden', border: '1px solid rgba(72,26,26,.14)', boxShadow: '0 5px 18px rgba(45,17,16,.12)' }}>
-      <div style={{ aspectRatio: '16/9', background: C.dark, position: 'relative' }}>
-        <iframe
-          src={previewUrl}
-          title={`${title}, ${categoria}`}
-          loading="lazy"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-          style={{ border: 'none', display: 'block', height: '100%', inset: 0, position: 'absolute', width: '100%' }}
-        />
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '.75rem', padding: '.9rem 1rem' }}>
-        <div>
-          <p style={{ ...F.display, color: C.gold, fontSize: '.65rem', fontWeight: 700, letterSpacing: '.14em', margin: '0 0 .25rem', textTransform: 'uppercase' }}>{categoria}</p>
-          <h3 style={{ ...F.display, color: C.bordo, fontSize: '1.05rem', fontWeight: 700, margin: 0 }}>{title}</h3>
-        </div>
-        <a href={driveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${title} en Drive`} style={{ ...F.display, border: `1px solid ${C.gold}`, borderRadius: '999px', color: C.bordo, flexShrink: 0, fontSize: '.66rem', fontWeight: 700, letterSpacing: '.04em', padding: '.43rem .62rem', textDecoration: 'none', whiteSpace: 'nowrap' }}>
-          Ver en Drive ↗
-        </a>
-      </div>
-    </article>
-  );
-}
+export const metadata: Metadata = {
+  title: 'Videos de los ejemplares — 23° Remate Anual | Cabaña El Retiro',
+  description:
+    'Mirá los videos de los 23 corrales del 23° Remate Anual de Cabaña El Retiro: toros Braford y Brangus, y vaquillonas de generaciones avanzadas.',
+};
 
 function VideoGroup({ id, eyebrow, title, description, videos, tone = 'light' }: { id: string; eyebrow: string; title: string; description: string; videos: VideoRemate[]; tone?: 'light' | 'cream' }) {
   return (
-    <section id={id} style={{ background: tone === 'cream' ? C.cream : C.white, padding: '3.75rem 2rem' }}>
+    <section id={id} style={{ background: tone === 'cream' ? C.cream : C.white, padding: '3.75rem 2rem', scrollMarginTop: '5rem' }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
         <SectionTitle eyebrow={eyebrow} align="left" color={C.bordo} style={{ marginBottom: '.9rem' }}>{title}</SectionTitle>
         <p style={{ ...F.body, color: '#5e4c45', fontSize: '.94rem', lineHeight: 1.65, margin: '0 0 1.8rem', maxWidth: 680 }}>{description}</p>
@@ -61,8 +39,8 @@ export default function VideosDelRematePage() {
         </div>
       </section>
 
-      <VideoGroup id="toros" eyebrow="Lotes en venta" title="Toros" description="Videos de los corrales 01 al 14." videos={VIDEOS_TOROS} />
-      <VideoGroup id="vaquillonas" eyebrow="Lotes en venta" title="Vaquillonas" description="Videos de los corrales 15 al 23." videos={VIDEOS_VAQUILLONAS} tone="cream" />
+      <VideoGroup id="toros" eyebrow="Lotes en venta" title="Toros" description={`Videos de los corrales 01 al 14 — ${VIDEOS_TOROS.length} lotes.`} videos={VIDEOS_TOROS} />
+      <VideoGroup id="vaquillonas" eyebrow="Lotes en venta" title="Vaquillonas" description={`Videos de los corrales 15 al 23 — ${VIDEOS_VAQUILLONAS.length} lotes.`} videos={VIDEOS_VAQUILLONAS} tone="cream" />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { C, F } from './theme';
 
 const LEFT: [string, string][] = [
+  ['Videos del Remate', '/videos-del-remate'],
   ['Historial de Remates', '/historial-remates'],
   ['Nuestra Historia', '/nuestra-historia'],
 ];
