@@ -14,6 +14,18 @@ import type { VideoRemate } from '../data/videos-remate';
  * play negro genérico, barras negras según el encuadre del video). El facade
  * nos devuelve el control visual y deja la carga en un solo pedido de imagen.
  */
+/**
+ * Alto que reservamos para la barra del reproductor de Drive.
+ *
+ * Drive monta su propia barra dentro del iframe y empuja el video hacia
+ * abajo. Si el contenedor es 16:9 exacto, el video ya no entra y se corta.
+ * Verificado que los archivos originales son 16:9 limpios (0 px de barras
+ * negras), así que el recorte lo causaba el reproductor, no el material.
+ * Valor medido en el HTML del reproductor (height:48px). Si Drive lo cambia,
+ * este es el único número a tocar.
+ */
+const CHROME_DRIVE_PX = 48;
+
 export function VideoCard({ video, categoria }: { video: VideoRemate; categoria: string }) {
   const [playing, setPlaying] = useState(false);
   const [hover, setHover] = useState(false);
@@ -39,11 +51,18 @@ export function VideoCard({ video, categoria }: { video: VideoRemate; categoria:
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div style={{ aspectRatio: '16/9', background: C.dark, position: 'relative', overflow: 'hidden' }}>
+      <div
+        style={
+          playing
+            ? // 16:9 del video + el alto de la barra de Drive, para que no lo recorte
+              { background: C.dark, overflow: 'hidden', paddingTop: `calc(56.25% + ${CHROME_DRIVE_PX}px)`, position: 'relative', width: '100%' }
+            : { aspectRatio: '16/9', background: C.dark, overflow: 'hidden', position: 'relative' }
+        }
+      >
         {playing ? (
           <iframe
             src={previewUrl}
-            title={`${title}, ${categoria}`}
+            title={title}
             allow="autoplay; fullscreen"
             allowFullScreen
             style={{ border: 'none', display: 'block', height: '100%', inset: 0, position: 'absolute', width: '100%' }}
