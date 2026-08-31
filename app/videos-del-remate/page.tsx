@@ -13,6 +13,11 @@ export const metadata: Metadata = {
 export default function VideosDelRematePage() {
   return (
     <div style={{ background: C.white }}>
+      {/* Las miniaturas salen de i.ytimg.com y el reproductor de YouTube:
+          abrir las conexiones antes de tiempo le saca un par de saltos de red
+          a la carga en el celular. */}
+      <link rel="preconnect" href="https://i.ytimg.com" />
+      <link rel="preconnect" href="https://www.youtube-nocookie.com" />
       <section className="remate-hero" style={{ background: `linear-gradient(120deg, ${C.dark} 0%, ${C.bordo} 68%, #6b2a26 100%)`, textAlign: 'center' }}>
         <SectionTitle as="h1" eyebrow="23° Remate Anual" style={{ marginBottom: '1rem' }}>Videos de los ejemplares</SectionTitle>
         <p style={{ ...F.body, color: 'rgba(255,255,255,.88)', fontSize: '1rem', lineHeight: 1.7, margin: '0 auto', maxWidth: 680 }}>
