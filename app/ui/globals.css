@@ -68,6 +68,7 @@ a { cursor: pointer; }
 /* ── Lightbox del reproductor ──────────────────────────────────────────── */
 .vlb-overlay {
   --vlb-reservado: 11.5rem; /* barras de arriba y abajo + respiros */
+  --drive-barra: 0px;       /* barra propia del player de Drive; ver .vlb-frame */
   position: fixed;
   inset: 0;
   z-index: 200;
@@ -120,44 +121,61 @@ a { cursor: pointer; }
   justify-content: center;
 }
 
-/* El contenedor tiene que ser 16:9 EXACTO. El reproductor de Drive escala el
-   video como object-fit:cover, así que rellena la caja y recorta lo que sobra:
-   con cualquier alto de más (antes reservábamos 48 px "para la barra de Drive")
-   el video se agranda y se come los bordes — se perdían el número de corral,
-   el logo y la línea de DEPs. Comprobado con el mismo video a 640x360 (entra
-   entero) y a 640x408 (recortado a izquierda y derecha). Drive no monta ninguna
-   barra que empuje el contenido: el ícono de "abrir en ventana" flota encima.
+/* Drive cambia de reproductor según el ancho del iframe:
+
+   - De ~420 px para arriba usa el player grande, con los controles flotando
+     ENCIMA del video. Ahí la caja tiene que ser 16:9 exacto: cualquier alto de
+     más lo escala como cover y le come los bordes (se pierden el número de
+     corral y la línea de DEPs). Medido con el mismo video a 640x360 (entra
+     entero) y a 640x408 (recortado a los costados).
+
+   - Por debajo de ~420 px usa un player compacto que monta una barra propia de
+     ~42 px ARRIBA del video y lo empuja hacia abajo. Ahí hay que sumarle ese
+     alto a la caja, si no el video queda aplastado y recortado (medido en
+     producción: 46 px de barra y ratio 2.28 en vez de 1.778).
+
+   Por eso --drive-barra vale 0 y sólo se activa en pantallas angostas. El
+   breakpoint es de viewport: el player mide ~19 px menos, así que 440 px de
+   viewport ≈ 421 px de player.
+
+   Se intentó evitar la barra montando el iframe a 640 px y achicándolo con
+   transform:scale. Anda en Chrome pero NO en iOS Safari: ahí el iframe recibe
+   el tamaño ya escalado, Drive arma igual el player compacto y sus controles
+   quedan mal posicionados y duplicados, con el scrim oscuro pegado (el video se
+   veía casi negro). No usar transform sobre este iframe.
+
    .vlb-frame tiene que seguir siendo hijo de .vlb-player: el padding porcentual
    se calcula contra el ancho del padre, y es .vlb-player el que lleva el ancho
    ya capado por el alto de pantalla. */
 .vlb-player {
   width: 100%;
-  max-width: min(1120px, calc((100vh - var(--vlb-reservado)) * 1.7778));
+  max-width: min(1120px, calc((100vh - var(--vlb-reservado) - var(--drive-barra)) * 1.7778));
 }
 /* svh = viewport chico (barra de URL a la vista): en el celular es el único
    alto que garantiza que no se desborde cuando aparece la barra del navegador. */
 @supports (height: 100svh) {
-  .vlb-player { max-width: min(1120px, calc((100svh - var(--vlb-reservado)) * 1.7778)); }
+  .vlb-player { max-width: min(1120px, calc((100svh - var(--vlb-reservado) - var(--drive-barra)) * 1.7778)); }
 }
 .vlb-frame {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 exacto — ver comentario de arriba */
+  padding-top: calc(56.25% + var(--drive-barra)); /* ver comentario de arriba */
   background: #000;
   overflow: hidden;
   box-shadow: 0 18px 50px rgba(0, 0, 0, .55);
 }
-/* El tamaño y el scale del iframe los pone VideoLightbox (ver ANCHO_BASE ahí):
-   se monta a 640 px y se achica, porque Drive se rompe en viewports chicos.
-   transform-origin arriba-izquierda para que al achicarlo quede pegado al borde
-   de la caja, y overflow:hidden del contenedor recorta lo que sobra. */
 .vlb-frame iframe {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border: 0;
   display: block;
-  transform-origin: 0 0;
+}
+
+/* Zona del player compacto de Drive: le reservamos su barra (ver .vlb-frame) */
+@media (max-width: 440px) {
+  .vlb-overlay { --drive-barra: 42px; }
 }
 
 @media (max-width: 640px) {
