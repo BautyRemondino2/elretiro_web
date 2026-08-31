@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { C, F } from '../components/theme';
 import { drivePreview, driveView, tituloVideo, type VideoRemate } from '../data/videos-remate';
@@ -12,15 +12,55 @@ import { drivePreview, driveView, tituloVideo, type VideoRemate } from '../data/
  * ~350 px y el video quedaba diminuto. Sacándolo a un overlay usa todo el ancho
  * de la pantalla y el alto se calcula contra el viewport.
  *
- * El encuadre (16:9 exacto, sin reservarle alto de más al reproductor) lo maneja
- * .vlb-player/.vlb-frame en globals.css, donde está explicado por qué.
+ * El encuadre (16:9 exacto) lo maneja .vlb-player/.vlb-frame en globals.css.
  */
+
+/**
+ * Ancho a partir del cual el reproductor de Drive se comporta bien.
+ *
+ * Por debajo de ~400 px Drive cambia a un layout compacto que monta una barra
+ * propia de ~40-48 px ARRIBA del video: el video se corre hacia abajo, queda
+ * aplastado y se recorta. Y el póster previo, más abajo de ~560 px, lo escala
+ * como cover y le come los bordes (se pierden el número de corral y los DEPs).
+ * En el celular el reproductor mide ~371 px, o sea que caía justo en la zona mala.
+ *
+ * En vez de reservarle alto a esa barra —que sólo existe en pantallas chicas y
+ * cuyo alto varía— nunca le damos a Drive un viewport chico: montamos el iframe
+ * a 640 px y lo achicamos con transform:scale hasta el ancho real. Drive cree
+ * que tiene 640 px, usa el layout bueno, y nosotros lo vemos del tamaño que
+ * corresponde. Medido: banda de 0 px arriba y abajo, y el video ocupa la caja
+ * entera a 16:9. Cuando la caja ya es más ancha que 640 px (desktop) no se
+ * escala nada, para no reescalar de más.
+ */
+const ANCHO_BASE = 640;
 
 type Item = { video: VideoRemate; categoria: string };
 
 export function VideoLightbox({ items, index, onClose, onIndex }: { items: Item[]; index: number; onClose: () => void; onIndex: (i: number) => void }) {
   const [montado, setMontado] = useState(false);
   useEffect(() => setMontado(true), []);
+
+  /* Escala del iframe: ver ANCHO_BASE. Medimos la caja real y, si es más
+     angosta que 640 px, montamos el iframe a 640 y lo achicamos. */
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [caja, setCaja] = useState({ ancho: ANCHO_BASE, escala: 1 });
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+    const medir = () => {
+      const ancho = el.clientWidth;
+      if (!ancho) return;
+      const base = Math.max(ancho, ANCHO_BASE);
+      setCaja({ ancho: base, escala: ancho / base });
+    };
+    medir();
+    const ro = new ResizeObserver(medir);
+    ro.observe(el);
+    return () => ro.disconnect();
+    // depende de `montado`: en el primer render devolvemos null (el portal todavía
+    // no existe) y frameRef.current es null. Con deps [] el observer nunca se
+    // llegaba a enganchar y la escala se quedaba en 1.
+  }, [montado]);
 
   const actual = items[index];
   const anterior = useCallback(() => onIndex((index - 1 + items.length) % items.length), [index, items.length, onIndex]);
@@ -90,7 +130,7 @@ export function VideoLightbox({ items, index, onClose, onIndex }: { items: Item[
 
       <div className="vlb-stage">
         <div className="vlb-player">
-          <div className="vlb-frame">
+          <div className="vlb-frame" ref={frameRef}>
             {/* key = driveId: al cambiar de corral remontamos el iframe en vez de
                 reusarlo, si no Drive se queda con el video anterior cargado */}
             <iframe
@@ -99,6 +139,11 @@ export function VideoLightbox({ items, index, onClose, onIndex }: { items: Item[
               title={titulo}
               allow="autoplay; fullscreen"
               allowFullScreen
+              style={{
+                height: Math.round((caja.ancho * 9) / 16),
+                transform: `scale(${caja.escala})`,
+                width: caja.ancho,
+              }}
             />
           </div>
         </div>
