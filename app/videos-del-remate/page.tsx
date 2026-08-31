@@ -26,6 +26,16 @@ export default function VideosDelRematePage() {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.7rem', justifyContent: 'center', marginTop: '1.6rem' }}>
           <a href="#toros" style={{ ...F.display, background: C.gold, borderRadius: '999px', color: C.dark, fontSize: '.78rem', fontWeight: 700, letterSpacing: '.05em', padding: '.65rem 1.05rem', textDecoration: 'none' }}>Ver toros</a>
           <a href="#vaquillonas" style={{ ...F.display, border: `1px solid ${C.gold}`, borderRadius: '999px', color: C.white, fontSize: '.78rem', fontWeight: 700, letterSpacing: '.05em', padding: '.65rem 1.05rem', textDecoration: 'none' }}>Ver vaquillonas</a>
+          {/* Mirando los lotes es donde más se busca el catálogo, así que va acá
+              también. Avisamos el peso: se abre mucho desde el campo con datos. */}
+          <a
+            href="/catalogos/CATALOGO%202026.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ ...F.display, border: `1px solid ${C.gold}`, borderRadius: '999px', color: C.white, fontSize: '.78rem', fontWeight: 700, letterSpacing: '.05em', padding: '.65rem 1.05rem', textDecoration: 'none' }}
+          >
+            Catálogo del remate ↗ <span style={{ ...F.body, fontWeight: 400, opacity: .7 }}>· PDF 53 MB</span>
+          </a>
         </div>
       </section>
 

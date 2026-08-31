@@ -68,7 +68,8 @@ export default function HomePage() {
             <Btn href="https://www.youtube.com/live/3WHPPliIBCo" size="lg" style={{ alignSelf: 'flex-start' }}>🔴 Ver Streaming en Vivo</Btn>
             <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
               <Btn to="/videos-del-remate" variant="outline">🎬 Ver videos de los ejemplares</Btn>
-              <Btn href="https://app.rosgannet.com.ar" variant="outline">📢 Catálogo del Remate</Btn>
+              <Btn href="/catalogos/CATALOGO%202026.pdf" variant="outline">📄 Catálogo del Remate</Btn>
+              <Btn href="https://app.rosgannet.com.ar" variant="outline">📢 Remate online</Btn>
             </div>
           </div>
         </div>
