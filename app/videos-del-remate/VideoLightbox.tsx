@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { C, F } from '../components/theme';
-import { drivePreview, driveView, tituloVideo, type VideoRemate } from '../data/videos-remate';
+import { esYoutube, textoExterno, tituloVideo, urlEmbed, urlExterna, type VideoRemate } from '../data/videos-remate';
 
 /**
  * Reproductor a pantalla completa (patrón lightbox, como el embed de YouTube).
@@ -91,14 +91,14 @@ export function VideoLightbox({ items, index, onClose, onIndex }: { items: Item[
 
       <div className="vlb-stage">
         <div className="vlb-player">
-          <div className="vlb-frame">
+          <div className={`vlb-frame${esYoutube(actual.video) ? ' vlb-frame-yt' : ''}`}>
             {/* key = driveId: al cambiar de corral remontamos el iframe en vez de
                 reusarlo, si no Drive se queda con el video anterior cargado */}
             <iframe
               key={actual.video.driveId}
-              src={drivePreview(actual.video)}
+              src={urlEmbed(actual.video)}
               title={titulo}
-              allow="autoplay; fullscreen"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               allowFullScreen
             />
           </div>
@@ -107,8 +107,8 @@ export function VideoLightbox({ items, index, onClose, onIndex }: { items: Item[
 
       <div className="vlb-bar vlb-bar-pie">
         <button type="button" onClick={anterior} style={navBtn} aria-label="Corral anterior">← Anterior</button>
-        <a href={driveView(actual.video)} target="_blank" rel="noopener noreferrer" style={{ ...navBtn, borderColor: C.gold, color: C.gold }}>
-          Abrir en Drive ↗
+        <a href={urlExterna(actual.video)} target="_blank" rel="noopener noreferrer" style={{ ...navBtn, borderColor: C.gold, color: C.gold }}>
+          {textoExterno(actual.video)}
         </a>
         <button type="button" onClick={siguiente} style={navBtn} aria-label="Corral siguiente">Siguiente →</button>
       </div>

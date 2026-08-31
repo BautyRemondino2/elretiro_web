@@ -178,6 +178,9 @@ a { cursor: pointer; }
   .vlb-overlay { --drive-barra: 42px; }
 }
 
+/* YouTube no monta ninguna barra: su caja es 16:9 exacto en todos los anchos. */
+.vlb-frame-yt { padding-top: 56.25%; }
+
 @media (max-width: 640px) {
   .vlb-overlay { --vlb-reservado: 10rem; padding-left: .6rem; padding-right: .6rem; gap: .6rem; }
   .vlb-bar-pie { flex-wrap: nowrap; gap: .4rem; }

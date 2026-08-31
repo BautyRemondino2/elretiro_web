@@ -1,7 +1,19 @@
 export type VideoRemate = {
   corral: number;
   nombre?: string;
+  /** ID del archivo en Drive. Se usa mientras el lote no esté en YouTube. */
   driveId: string;
+  /**
+   * ID del video en YouTube (los 11 caracteres de youtu.be/XXXXXXXXXXX).
+   * Si está, se reproduce desde YouTube y se ignora driveId.
+   *
+   * Por qué conviene: el reproductor de Drive cambia de layout según el ancho
+   * (abajo de ~420 px mete una barra propia arriba del video), recorta el
+   * póster en pantallas chicas y tiene cuota de ancho de banda — justo el día
+   * del remate, con mucha gente mirando a la vez, puede empezar a fallar.
+   * YouTube no tiene nada de eso.
+   */
+  youtubeId?: string;
 };
 
 export const VIDEOS_TOROS: VideoRemate[] = [
@@ -39,6 +51,27 @@ export const corralLabel = (v: VideoRemate) => String(v.corral).padStart(2, '0')
 /** Título visible del lote, compartido por la tarjeta y el reproductor. */
 export const tituloVideo = (v: VideoRemate) => `Corral ${corralLabel(v)}${v.nombre ? ` — ${v.nombre}` : ''}`;
 
-export const drivePoster = (v: VideoRemate) => `https://drive.google.com/thumbnail?id=${v.driveId}&sz=w1600`;
-export const drivePreview = (v: VideoRemate) => `https://drive.google.com/file/d/${v.driveId}/preview`;
-export const driveView = (v: VideoRemate) => `https://drive.google.com/file/d/${v.driveId}/view`;
+/** Un lote está migrado cuando tiene ID de YouTube. */
+export const esYoutube = (v: VideoRemate) => Boolean(v.youtubeId);
+
+/** URL del reproductor embebido. playsinline evita que iOS lo saque a pantalla completa solo. */
+export const urlEmbed = (v: VideoRemate) =>
+  v.youtubeId
+    ? `https://www.youtube-nocookie.com/embed/${v.youtubeId}?rel=0&modestbranding=1&playsinline=1`
+    : `https://drive.google.com/file/d/${v.driveId}/preview`;
+
+/** URL para abrir el video en su sitio (YouTube o Drive), fuera de la página. */
+export const urlExterna = (v: VideoRemate) =>
+  v.youtubeId ? `https://youtu.be/${v.youtubeId}` : `https://drive.google.com/file/d/${v.driveId}/view`;
+
+/** Texto del botón que abre el video afuera. */
+export const textoExterno = (v: VideoRemate) => (v.youtubeId ? 'Ver en YouTube ↗' : 'Abrir en Drive ↗');
+
+/**
+ * Miniaturas a probar, en orden. La tarjeta va bajando si alguna falla:
+ * maxresdefault no existe para videos subidos en baja resolución.
+ */
+export const posters = (v: VideoRemate) =>
+  v.youtubeId
+    ? [`https://i.ytimg.com/vi/${v.youtubeId}/maxresdefault.jpg`, `https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg`]
+    : [`https://drive.google.com/thumbnail?id=${v.driveId}&sz=w1600`];

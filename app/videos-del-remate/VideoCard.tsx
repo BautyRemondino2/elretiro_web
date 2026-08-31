@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { C, F } from '../components/theme';
-import { drivePoster, tituloVideo, type VideoRemate } from '../data/videos-remate';
+import { posters, tituloVideo, type VideoRemate } from '../data/videos-remate';
 
 /**
  * Tarjeta de video con patrón "facade": mostramos un poster nuestro (miniatura
@@ -16,7 +16,9 @@ import { drivePoster, tituloVideo, type VideoRemate } from '../data/videos-remat
  */
 export function VideoCard({ video, categoria, onOpen }: { video: VideoRemate; categoria: string; onOpen: () => void }) {
   const [hover, setHover] = useState(false);
-  const [posterFallo, setPosterFallo] = useState(false);
+  /* Índice de la miniatura en uso; si falla pasamos a la siguiente y,
+     agotadas todas, al degradé de marca. */
+  const [posterIdx, setPosterIdx] = useState(0);
   const [conHover, setConHover] = useState(false);
 
   /* En touch el navegador dispara mouseenter al tocar y el estado queda pegado
@@ -27,6 +29,8 @@ export function VideoCard({ video, categoria, onOpen }: { video: VideoRemate; ca
   }, []);
 
   const activo = hover && conHover;
+  const candidatos = posters(video);
+  const poster = candidatos[posterIdx];
   const title = tituloVideo(video);
 
   return (
@@ -59,13 +63,13 @@ export function VideoCard({ video, categoria, onOpen }: { video: VideoRemate; ca
           WebkitTapHighlightColor: 'transparent',
         }}
       >
-        <div style={{ aspectRatio: '16/9', background: posterFallo ? `linear-gradient(150deg, ${C.bordo}, ${C.dark})` : C.dark, overflow: 'hidden', position: 'relative', width: '100%' }}>
-          {!posterFallo && (
+        <div style={{ aspectRatio: '16/9', background: poster ? C.dark : `linear-gradient(150deg, ${C.bordo}, ${C.dark})`, overflow: 'hidden', position: 'relative', width: '100%' }}>
+          {poster && (
             <img
-              src={drivePoster(video)}
+              src={poster}
               alt=""
               loading="lazy"
-              onError={() => setPosterFallo(true)}
+              onError={() => setPosterIdx((i) => i + 1)}
               style={{
                 display: 'block',
                 height: '100%',
