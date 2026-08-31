@@ -49,3 +49,136 @@ a { cursor: pointer; }
   }
   .hero-logos img { height: 64px !important; }
 }
+
+/* ══ Videos del remate ═══════════════════════════════════════════════════ */
+
+/* Play de la tarjeta: en el celular lo achicamos para que no tape al animal */
+.vcard-play { width: 62px; height: 62px; }
+
+.remate-hero { padding: 3.4rem 2rem 3.2rem; }
+.remate-section { padding: 3.75rem 2rem; }
+
+@media (max-width: 640px) {
+  .remate-hero { padding: 2.5rem 1.15rem 2.3rem; }
+  .remate-section { padding: 2.5rem 1.15rem; }
+  .remate-video-grid { gap: 1.05rem !important; }
+  .vcard-play { width: 52px; height: 52px; }
+}
+
+/* ── Lightbox del reproductor ──────────────────────────────────────────── */
+.vlb-overlay {
+  --vlb-reservado: 11.5rem; /* barras de arriba y abajo + respiros */
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  padding: 1rem;
+  background: rgba(18, 7, 7, .975);
+  backdrop-filter: blur(4px);
+  animation: fadeIn .18s ease both;
+  /* iOS: que el overlay no se corte contra el notch ni la barra de gestos */
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.vlb-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  flex: 0 0 auto;
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+}
+.vlb-bar-pie { justify-content: center; gap: .5rem; flex-wrap: wrap; }
+.vlb-titulo { font-size: clamp(.95rem, 3.4vw, 1.25rem); }
+
+.vlb-cerrar {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.vlb-cerrar:hover { background: #b89e58; border-color: #b89e58; color: #2d1110; }
+
+.vlb-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* El contenedor tiene que ser 16:9 EXACTO. El reproductor de Drive escala el
+   video como object-fit:cover, así que rellena la caja y recorta lo que sobra:
+   con cualquier alto de más (antes reservábamos 48 px "para la barra de Drive")
+   el video se agranda y se come los bordes — se perdían el número de corral,
+   el logo y la línea de DEPs. Comprobado con el mismo video a 640x360 (entra
+   entero) y a 640x408 (recortado a izquierda y derecha). Drive no monta ninguna
+   barra que empuje el contenido: el ícono de "abrir en ventana" flota encima.
+   .vlb-frame tiene que seguir siendo hijo de .vlb-player: el padding porcentual
+   se calcula contra el ancho del padre, y es .vlb-player el que lleva el ancho
+   ya capado por el alto de pantalla. */
+.vlb-player {
+  width: 100%;
+  max-width: min(1120px, calc((100vh - var(--vlb-reservado)) * 1.7778));
+}
+/* svh = viewport chico (barra de URL a la vista): en el celular es el único
+   alto que garantiza que no se desborde cuando aparece la barra del navegador. */
+@supports (height: 100svh) {
+  .vlb-player { max-width: min(1120px, calc((100svh - var(--vlb-reservado)) * 1.7778)); }
+}
+.vlb-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 exacto — ver comentario de arriba */
+  background: #000;
+  border-radius: .5rem;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .55);
+}
+.vlb-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .vlb-overlay { --vlb-reservado: 10rem; padding-left: .6rem; padding-right: .6rem; gap: .6rem; }
+  .vlb-bar-pie { flex-wrap: nowrap; gap: .4rem; }
+  .vlb-bar-pie > * { padding: .45rem .6rem !important; font-size: .62rem !important; }
+}
+
+/* Celular apaisado: las barras se comen todo el alto, así que las achicamos
+   —sin esconderlas— para que al video le quede el máximo posible. */
+@media (max-height: 560px) {
+  .vlb-overlay {
+    --vlb-reservado: 8rem;
+    gap: .35rem;
+    padding-top: .45rem;
+    padding-bottom: .45rem;
+    padding-left: max(.6rem, env(safe-area-inset-left));
+    padding-right: max(.6rem, env(safe-area-inset-right));
+  }
+  .vlb-cerrar { width: 34px; height: 34px; }
+  .vlb-bar-pie > * { padding: .35rem .7rem !important; font-size: .66rem !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vlb-overlay { animation: none; }
+}

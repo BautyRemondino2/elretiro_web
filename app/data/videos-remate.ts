@@ -32,3 +32,13 @@ export const VIDEOS_VAQUILLONAS: VideoRemate[] = [
   { corral: 22, driveId: '14TkKXVOGhneHw29QNC4zS9ztSjpsU1yY' },
   { corral: 23, driveId: '1K0O6Eg_or-bT-5APuwMmXSfMgqqq7FXm' },
 ];
+
+/** Corral con dos dígitos, como figura en el catálogo ("07", no "7"). */
+export const corralLabel = (v: VideoRemate) => String(v.corral).padStart(2, '0');
+
+/** Título visible del lote, compartido por la tarjeta y el reproductor. */
+export const tituloVideo = (v: VideoRemate) => `Corral ${corralLabel(v)}${v.nombre ? ` — ${v.nombre}` : ''}`;
+
+export const drivePoster = (v: VideoRemate) => `https://drive.google.com/thumbnail?id=${v.driveId}&sz=w1600`;
+export const drivePreview = (v: VideoRemate) => `https://drive.google.com/file/d/${v.driveId}/preview`;
+export const driveView = (v: VideoRemate) => `https://drive.google.com/file/d/${v.driveId}/view`;
