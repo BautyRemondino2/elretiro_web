@@ -19,6 +19,10 @@ const panel: React.CSSProperties = {
   borderRadius: '.6rem',
 };
 
+/** Preofertas del 23° Remate en Rosgan Net (allí es el remate 1996). */
+const URL_PREOFERTAS =
+  'https://app.rosgannet.com.ar/remate/1996?remateName=23%C2%B0%20Remate%20Anual%20Caba%C3%B1a%20el%20Retiro&location=Sociedad%20Rural%20de%20San%20Justo&type=lote';
+
 /* Datos del 23° Remate Anual (folleto 2026) */
 const OFERTA: [string, string][] = [
   ['30', 'Toros Braford'],
@@ -69,7 +73,7 @@ export default function HomePage() {
             <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
               <Btn to="/videos-del-remate" variant="outline">🎬 Ver videos de los ejemplares</Btn>
               <Btn href="/catalogos/CATALOGO%202026.pdf" variant="outline">📄 Catálogo del Remate</Btn>
-              <Btn href="https://app.rosgannet.com.ar" variant="outline">📢 Remate online</Btn>
+              <Btn href={URL_PREOFERTAS} variant="outline">📢 Ver PREOFERTAS</Btn>
             </div>
           </div>
         </div>
