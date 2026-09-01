@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { C, F } from '../components/theme';
-import { esYoutube, textoExterno, tituloVideo, urlEmbed, urlExterna, type VideoRemate } from '../data/videos-remate';
+import { tituloVideo, urlEmbed, urlExterna, type VideoRemate } from '../data/videos-remate';
 
 /**
  * Reproductor a pantalla completa (patrón lightbox, como el embed de YouTube).
@@ -12,8 +12,7 @@ import { esYoutube, textoExterno, tituloVideo, urlEmbed, urlExterna, type VideoR
  * ~350 px y el video quedaba diminuto. Sacándolo a un overlay usa todo el ancho
  * de la pantalla y el alto se calcula contra el viewport.
  *
- * El encuadre lo maneja .vlb-player/.vlb-frame en globals.css, incluida la barra
- * que Drive monta en pantallas angostas (ver --drive-barra ahí).
+ * El encuadre (16:9) lo maneja .vlb-player/.vlb-frame en globals.css.
  */
 
 
@@ -91,11 +90,11 @@ export function VideoLightbox({ items, index, onClose, onIndex }: { items: Item[
 
       <div className="vlb-stage">
         <div className="vlb-player">
-          <div className={`vlb-frame${esYoutube(actual.video) ? ' vlb-frame-yt' : ''}`}>
-            {/* key = driveId: al cambiar de corral remontamos el iframe en vez de
-                reusarlo, si no Drive se queda con el video anterior cargado */}
+          <div className="vlb-frame">
+            {/* key = youtubeId: al cambiar de corral remontamos el iframe en vez
+                de reusarlo, si no el reproductor se queda con el video anterior */}
             <iframe
-              key={actual.video.driveId}
+              key={actual.video.youtubeId}
               src={urlEmbed(actual.video)}
               title={titulo}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
@@ -108,7 +107,7 @@ export function VideoLightbox({ items, index, onClose, onIndex }: { items: Item[
       <div className="vlb-bar vlb-bar-pie">
         <button type="button" onClick={anterior} style={navBtn} aria-label="Corral anterior">← Anterior</button>
         <a href={urlExterna(actual.video)} target="_blank" rel="noopener noreferrer" style={{ ...navBtn, borderColor: C.gold, color: C.gold }}>
-          {textoExterno(actual.video)}
+          Ver en YouTube ↗
         </a>
         <button type="button" onClick={siguiente} style={navBtn} aria-label="Corral siguiente">Siguiente →</button>
       </div>

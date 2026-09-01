@@ -31,7 +31,7 @@ const GRUPOS: Grupo[] = [
 /* Lista plana de los 23 corrales: el lightbox navega de corrido con las flechas
    sin importar en qué sección arrancaste. */
 const ITEMS = GRUPOS.flatMap((g) => g.videos.map((video) => ({ video, categoria: g.titulo })));
-const offsetDe = (id: string) => ITEMS.findIndex((it) => it.video.driveId === GRUPOS.find((g) => g.id === id)!.videos[0].driveId);
+const offsetDe = (id: string) => ITEMS.findIndex((it) => it.video.corral === GRUPOS.find((g) => g.id === id)!.videos[0].corral);
 
 export function VideoGallery() {
   const [abierto, setAbierto] = useState<number | null>(null);
@@ -52,7 +52,7 @@ export function VideoGallery() {
               <p style={{ ...F.body, color: '#5e4c45', fontSize: '.94rem', lineHeight: 1.65, margin: '0 0 1.8rem', maxWidth: 680 }}>{g.descripcion}</p>
               <div className="remate-video-grid" style={{ display: 'grid', gap: '1.4rem', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' }}>
                 {g.videos.map((video, i) => (
-                  <VideoCard key={video.driveId} video={video} categoria={g.titulo} onOpen={() => setAbierto(offset + i)} />
+                  <VideoCard key={video.corral} video={video} categoria={g.titulo} onOpen={() => setAbierto(offset + i)} />
                 ))}
               </div>
             </div>

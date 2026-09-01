@@ -5,14 +5,14 @@ import { C, F } from '../components/theme';
 import { posters, tituloVideo, type VideoRemate } from '../data/videos-remate';
 
 /**
- * Tarjeta de video con patrón "facade": mostramos un poster nuestro (miniatura
- * de Drive) con el botón de play de la marca, y el video recién se monta —en el
- * lightbox— al hacer clic.
+ * Tarjeta de video con patrón "facade": mostramos la miniatura con el botón de
+ * play de la marca, y el reproductor recién se monta —en el lightbox— al hacer
+ * clic.
  *
- * Por qué: 23 iframes de Drive montados de entrada hacen que la página cargue
- * lentísimo, y cada uno pinta su propio chrome (ícono de "abrir en ventana",
- * play negro genérico). El facade nos devuelve el control visual y deja la
- * carga en un solo pedido de imagen.
+ * Por qué: 23 iframes de YouTube montados de entrada hacen que la página cargue
+ * lentísimo (cada uno se trae su propio player), y encima cada uno pinta su
+ * chrome. El facade nos devuelve el control visual y deja la carga de la grilla
+ * en un solo pedido de imagen por tarjeta.
  */
 export function VideoCard({ video, categoria, onOpen }: { video: VideoRemate; categoria: string; onOpen: () => void }) {
   const [hover, setHover] = useState(false);
