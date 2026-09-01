@@ -4,41 +4,32 @@ import React, { useState } from 'react';
 import { C, F } from '../components/theme';
 import { SectionTitle } from '../components/ui';
 
-const PREVIEWS = '/catalogos/catalogo_previews';
-
 type Catalogo = {
   year: number;
   file: string;
-  preview: string;
   /** El catálogo del remate en curso: se destaca y se rotula "Actual". */
   actual?: boolean;
-  /**
-   * La portada 2026 es apaisada y el resto verticales. Con el `cover` de la
-   * grilla quedaría recortada justo donde están el título y los datos, así que
-   * esas van con `contain` y se ven enteras sobre el fondo de marca.
-   */
-  fit?: 'cover' | 'contain';
   /** Aviso de peso: muchos compradores lo abren desde el campo, con datos móviles. */
   peso?: string;
 };
 
 const CATALOGOS: Catalogo[] = [
-  { year: 2026, file: 'CATALOGO 2026.pdf', preview: `${PREVIEWS}/CATALOGO_2026.jpg`, actual: true, fit: 'contain', peso: '53 MB' },
-  { year: 2025, file: 'CATALOGO 2025.pdf', preview: `${PREVIEWS}/CATALOGO_2025.png` },
-  { year: 2024, file: 'CATALOGO 2024_compressed.pdf', preview: `${PREVIEWS}/CATALOGO_2024.jpg` },
-  { year: 2023, file: 'CATALOGO 2023-comprimido.pdf', preview: `${PREVIEWS}/CATALOGO_2023.jpg` },
-  { year: 2022, file: 'CATALOGO 2022_compressed.pdf', preview: `${PREVIEWS}/CATALOGO_2022.jpg` },
-  { year: 2021, file: 'CATALOGO 2021.pdf', preview: `${PREVIEWS}/CATALOGO_2021.jpg` },
-  { year: 2020, file: 'CATALOGO 2020.pdf', preview: `${PREVIEWS}/CATALOGO_2020.jpg` },
-  { year: 2019, file: 'CATALOGO 2019_compressed.pdf', preview: `${PREVIEWS}/CATALOGO_2019.jpg` },
-  { year: 2016, file: 'CATALOGO 2016.pdf', preview: `${PREVIEWS}/CATALOGO_2016.jpg` },
-  { year: 2014, file: 'CATALOGO 2014.pdf', preview: `${PREVIEWS}/CATALOGO_2014.jpg` },
-  { year: 2012, file: 'CATALOGO 2012.pdf', preview: `${PREVIEWS}/CATALOGO_2012.jpg` },
-  { year: 2011, file: 'CATALOGO 2011.pdf', preview: `${PREVIEWS}/CATALOGO_2011.jpg` },
-  { year: 2010, file: 'CATALOGO 2010.pdf', preview: `${PREVIEWS}/CATALOGO_2010.jpg` },
+  { year: 2026, file: 'CATALOGO 2026.pdf', actual: true, peso: '53 MB' },
+  { year: 2025, file: 'CATALOGO 2025.pdf' },
+  { year: 2024, file: 'CATALOGO 2024_compressed.pdf' },
+  { year: 2023, file: 'CATALOGO 2023-comprimido.pdf' },
+  { year: 2022, file: 'CATALOGO 2022_compressed.pdf' },
+  { year: 2021, file: 'CATALOGO 2021.pdf' },
+  { year: 2020, file: 'CATALOGO 2020.pdf' },
+  { year: 2019, file: 'CATALOGO 2019_compressed.pdf' },
+  { year: 2016, file: 'CATALOGO 2016.pdf' },
+  { year: 2014, file: 'CATALOGO 2014.pdf' },
+  { year: 2012, file: 'CATALOGO 2012.pdf' },
+  { year: 2011, file: 'CATALOGO 2011.pdf' },
+  { year: 2010, file: 'CATALOGO 2010.pdf' },
 ];
 
-function CatTile({ year, file, preview, actual, fit = 'cover', peso }: Catalogo) {
+function CatTile({ year, file, actual, peso }: Catalogo) {
   const [h, setH] = useState(false);
   return (
     <a
@@ -50,13 +41,13 @@ function CatTile({ year, file, preview, actual, fit = 'cover', peso }: Catalogo)
       onMouseLeave={() => setH(false)}
       style={{ textDecoration: 'none', borderRadius: '.5rem', overflow: 'hidden', boxShadow: h ? '0 12px 26px rgba(0,0,0,.18)' : '0 2px 8px rgba(0,0,0,.1)', transition: 'transform .25s, box-shadow .25s', transform: h ? 'translateY(-4px)' : 'none', display: 'block', background: '#f3f3f3', outline: actual ? `2px solid ${C.gold}` : 'none', outlineOffset: actual ? 2 : 0 }}
     >
-      <div style={{ aspectRatio: '3/4', background: `linear-gradient(150deg,${C.bordo} 0%,${C.dark} 100%)`, position: 'relative', overflow: 'hidden' }}>
-        <img
-          src={preview}
-          alt={`Portada del catálogo ${year}`}
-          loading="lazy"
-          style={{ width: '100%', height: '100%', objectFit: fit, display: 'block', transition: 'transform .45s', transform: h ? 'scale(1.04)' : 'none' }}
-        />
+      {/* overflow:hidden es necesario: la cinta "Ver catálogo" descansa fuera del
+          borde inferior (translateY(100%)) y sube al hacer hover. Sin recorte se
+          apoya sobre el pie de la tarjeta y tapa el "Catálogo {año}". */}
+      <div style={{ aspectRatio: '3/4', background: `linear-gradient(150deg,${C.bordo} 0%,${C.dark} 100%)`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+        <img src="/logo.png" alt="" style={{ width: 46, opacity: 0.85, marginBottom: 8 }} />
+        <span style={{ ...F.display, color: C.gold, fontSize: '1.6rem', fontWeight: 700 }}>{year}</span>
+        <span style={{ ...F.body, color: 'rgba(255,255,255,.6)', fontSize: '.66rem', letterSpacing: '.12em', marginTop: 4, textTransform: 'uppercase' }}>Remate Anual</span>
         {actual && (
           <span style={{ position: 'absolute', top: '.5rem', left: '.5rem', background: C.gold, color: C.dark, ...F.display, fontWeight: 700, fontSize: '.6rem', letterSpacing: '.12em', padding: '.25rem .5rem', borderRadius: '999px' }}>ACTUAL</span>
         )}
