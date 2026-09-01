@@ -128,7 +128,18 @@ export default function HomePage() {
                 <div key={casa} style={{ marginBottom: '.9rem' }}>
                   <p style={{ ...F.display, color: C.white, fontWeight: 700, fontSize: '1rem', margin: 0 }}>{casa}</p>
                   <p style={{ ...F.body, color: 'rgba(255,255,255,.8)', fontSize: '.86rem', margin: '.15rem 0 0' }}>
-                    {persona} · <a href={`https://wa.me/54${tel.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" style={{ color: C.gold, textDecoration: 'none' }}>{tel}</a>
+                    {persona} ·{' '}
+                    {/* inline-block + padding: el enlace medía 19 px de alto y
+                        era difícil de acertar con el dedo. */}
+                    <a
+                      href={`https://wa.me/54${tel.replace(/[^0-9]/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Escribir por WhatsApp a ${persona}, ${tel}`}
+                      style={{ color: C.gold, textDecoration: 'none', display: 'inline-block', padding: '.45rem 0', whiteSpace: 'nowrap' }}
+                    >
+                      {tel}
+                    </a>
                   </p>
                 </div>
               ))}

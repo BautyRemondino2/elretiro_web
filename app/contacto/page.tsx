@@ -15,7 +15,7 @@ function SocialLink({ children, href }: { children: React.ReactNode; href: strin
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ ...F.display, color: C.bordo, fontSize: '.95rem', fontWeight: 600, textDecoration: 'none', transition: 'color .2s' }}
+      style={{ ...F.display, color: C.bordo, fontSize: '.95rem', fontWeight: 600, textDecoration: 'none', transition: 'color .2s', display: 'inline-flex', alignItems: 'center', minHeight: 44, padding: '0 .5rem' }}
       onMouseEnter={(e) => (e.currentTarget.style.color = C.gold)}
       onMouseLeave={(e) => (e.currentTarget.style.color = C.bordo)}
     >
@@ -40,9 +40,12 @@ export default function ContactoPage() {
             <img src={p.img} alt={p.name} style={{ width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', boxShadow: '0 0 0 3px rgba(184,158,88,.5)', marginBottom: '1rem' }} />
             <p style={{ ...F.display, fontWeight: 700, margin: '0 0 .25rem', fontSize: '1rem', color: C.bordo }}>{p.name}</p>
             <p style={{ ...F.body, color: C.gold, fontWeight: 600, margin: '0 0 .9rem', fontSize: '.8rem', letterSpacing: '.04em' }}>{p.role}</p>
-            <p style={{ ...F.body, margin: '.25rem 0', fontSize: '.88rem', color: '#444' }}>📞 {p.phone}</p>
-            <p style={{ ...F.body, margin: '.25rem 0 1.1rem', fontSize: '.88rem', color: '#444' }}>✉️ {p.email}</p>
-            <Btn href={`https://wa.me/${p.phone.replace(/[^0-9]/g, '')}`} size="sm">Escribir por WhatsApp</Btn>
+            {/* tel: y mailto: para que desde el celular se llame o se escriba de
+                un toque, en vez de tener que copiar el numero a mano. El padding
+                es para que el area tactil llegue a ~44px de alto. */}
+            <a href={`tel:${p.phone.replace(/[^0-9+]/g, '')}`} style={{ ...F.body, display: 'block', margin: 0, padding: '.5rem 0', fontSize: '.88rem', color: '#444', textDecoration: 'none' }}>📞 {p.phone}</a>
+            <a href={`mailto:${p.email}`} style={{ ...F.body, display: 'block', margin: '0 0 .8rem', padding: '.5rem 0', fontSize: '.88rem', color: '#444', textDecoration: 'none', overflowWrap: 'anywhere' }}>✉️ {p.email}</a>
+            <Btn href={`https://wa.me/${p.phone.replace(/[^0-9]/g, '')}`}>Escribir por WhatsApp</Btn>
           </div>
         ))}
       </div>

@@ -10,7 +10,7 @@ function ExtLink({ children, href }: { children: React.ReactNode; href: string }
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ ...F.body, color: C.gold, display: 'block', marginBottom: 6, textDecoration: 'none', fontSize: '.9rem', transition: 'color .2s, padding-left .2s' }}
+      style={{ ...F.body, color: C.gold, display: 'block', padding: '.35rem 0', textDecoration: 'none', fontSize: '.9rem', transition: 'color .2s, padding-left .2s' }}
       onMouseEnter={(e) => { e.currentTarget.style.color = C.white; e.currentTarget.style.paddingLeft = '4px'; }}
       onMouseLeave={(e) => { e.currentTarget.style.color = C.gold; e.currentTarget.style.paddingLeft = '0'; }}
     >
@@ -23,7 +23,7 @@ function IntLink({ children, href }: { children: React.ReactNode; href: string }
   return (
     <Link
       href={href}
-      style={{ ...F.body, color: C.gold, display: 'block', marginBottom: 6, textDecoration: 'none', fontSize: '.9rem', transition: 'color .2s, padding-left .2s' }}
+      style={{ ...F.body, color: C.gold, display: 'block', padding: '.35rem 0', textDecoration: 'none', fontSize: '.9rem', transition: 'color .2s, padding-left .2s' }}
       onMouseEnter={(e) => { e.currentTarget.style.color = C.white; e.currentTarget.style.paddingLeft = '4px'; }}
       onMouseLeave={(e) => { e.currentTarget.style.color = C.gold; e.currentTarget.style.paddingLeft = '0'; }}
     >
@@ -49,7 +49,11 @@ export default function Footer() {
         </div>
         <div>
           <h3 style={h3}>Contacto</h3>
-          <p style={{ ...F.body, margin: 0, fontSize: '.875rem', lineHeight: 1.8 }}>Ricardo Javier Remondino<br />+54 9 3404 631877<br />rjremondino@gmail.com</p>
+          <p style={{ ...F.body, margin: 0, fontSize: '.875rem', lineHeight: 1.8 }}>Ricardo Javier Remondino</p>
+          {/* Tocar el numero llama y el mail abre el correo: es la accion mas
+              buscada del sitio desde el celular. */}
+          <a href="tel:+5493404631877" style={{ ...F.body, color: C.white, display: 'block', fontSize: '.875rem', padding: '.35rem 0', textDecoration: 'none' }}>+54 9 3404 631877</a>
+          <a href="mailto:rjremondino@gmail.com" style={{ ...F.body, color: C.white, display: 'block', fontSize: '.875rem', padding: '.35rem 0', textDecoration: 'none', overflowWrap: 'anywhere' }}>rjremondino@gmail.com</a>
         </div>
         <div>
           <h3 style={h3}>Explorar</h3>
@@ -58,7 +62,9 @@ export default function Footer() {
           <IntLink href="/contacto">Contacto</IntLink>
         </div>
       </div>
-      <div style={{ ...F.body, textAlign: 'center', marginTop: '2.5rem', padding: '1.5rem 1rem', borderTop: '1px solid rgba(184,158,88,.18)', fontSize: '.75rem' }}>
+      {/* El padding de abajo lo pide el boton flotante de WhatsApp (56px + 22px
+          de margen, fixed abajo a la derecha): sin el, tapaba estas dos lineas. */}
+      <div className="footer-cierre" style={{ ...F.body, textAlign: 'center', marginTop: '2.5rem', padding: '1.5rem 1rem', borderTop: '1px solid rgba(184,158,88,.18)', fontSize: '.75rem' }}>
         <p style={{ ...F.display, margin: '0 0 6px', letterSpacing: '.22em', color: C.gold, fontSize: '.85rem' }}>EL PODER DE LA GENÉTICA</p>
         <p style={{ margin: '0 0 4px', opacity: 0.85 }}>Más de 30 años de producción y creando la más alta calidad de genética.</p>
         <p style={{ margin: 0, opacity: 0.6, letterSpacing: '.05em' }}>Todos los derechos reservados | CABAÑA EL RETIRO</p>

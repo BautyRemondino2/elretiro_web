@@ -182,3 +182,11 @@ a { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .vlb-overlay { animation: none; }
 }
+
+/* El botón flotante de WhatsApp es fixed abajo a la derecha (56 px + 22 px de
+   margen). En el celular se apoyaba sobre las dos últimas líneas del footer,
+   así que le dejamos ese alto libre. */
+@media (max-width: 640px) {
+  /* !important: el componente trae el padding inline, que gana por especificidad */
+  .footer-cierre { padding-bottom: 5.5rem !important; }
+}

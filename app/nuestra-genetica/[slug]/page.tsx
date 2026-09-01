@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import type { CSSProperties } from 'react';
 import { C, F } from '../../components/theme';
 import { Btn, MedalBadge, SectionTitle } from '../../components/ui';
@@ -10,8 +10,10 @@ import { ANIMALES, DEP_LABELS } from '../../data/animales';
 
 export default function AnimalDetailPage() {
   const params = useParams<{ slug: string }>();
-  const slug = params?.slug ?? 'gaucho';
-  const a = ANIMALES[slug] || ANIMALES.gaucho;
+  const slug = params?.slug ?? '';
+  const a = ANIMALES[slug];
+  // Sin ficha para ese slug mostramos 404 en vez de caer en otro animal.
+  if (!a) notFound();
   const depKeys = Object.keys(a.deps);
   const cell: CSSProperties = { ...F.body, border: `1px solid ${C.gold}`, padding: '10px 14px' };
 
@@ -20,7 +22,7 @@ export default function AnimalDetailPage() {
       {/* breadcrumb */}
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '1.25rem 2rem 0' }}>
         <span style={{ ...F.body, fontSize: '.85rem', color: 'rgba(255,255,255,.6)' }}>
-          <Link href="/nuestra-genetica" style={{ color: C.gold, textDecoration: 'none' }}>Genética</Link>
+          <Link href="/nuestra-genetica" style={{ color: C.gold, textDecoration: 'none', display: 'inline-block', padding: '.4rem 0' }}>Genética</Link>
           &nbsp;/&nbsp; {a.tipo} &nbsp;/&nbsp; <span style={{ color: C.white }}>{a.nombre}</span>
         </span>
       </div>
