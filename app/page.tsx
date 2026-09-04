@@ -69,7 +69,7 @@ export default function HomePage() {
               <p style={{ ...F.body, color: 'rgba(255,255,255,.9)', fontSize: '.92rem', margin: '.3rem 0 0', textShadow: '0 2px 8px rgba(0,0,0,.7)' }}>Sociedad Rural San Justo · Rut. Nac. 11 km 565,5</p>
             </div>
             <p style={{ ...F.body, color: 'rgba(255,255,255,.9)', fontSize: '1rem', lineHeight: 1.6, margin: '0 0 .5rem', maxWidth: 420 }}>Seguí el remate en vivo, mirá los videos y accedé al catálogo completo de nuestros ejemplares.</p>
-            <Btn href="https://www.youtube.com/live/3WHPPliIBCo" size="lg" style={{ alignSelf: 'flex-start' }}>🔴 Ver Streaming en Vivo</Btn>
+            <Btn href="https://www.youtube.com/live/6cn0eLiF1KM" size="lg" style={{ alignSelf: 'flex-start' }}>🔴 Ver Streaming en Vivo</Btn>
             <div style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
               <Btn to="/videos-del-remate" variant="outline">🎬 Ver videos de los ejemplares</Btn>
               <Btn href="/catalogos/CATALOGO%202026.pdf" variant="outline">📄 Catálogo del Remate</Btn>
